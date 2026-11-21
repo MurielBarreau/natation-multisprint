@@ -675,6 +675,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div class="row2"><input type="text" id="pClasse" placeholder="Classe (ex. 2de 5)" oninput="setProfil('classe',this.value)"></div>
     <div class="pillsOpt two" style="margin-top:10px"><label class="sx"><input type="radio" name="psexe" value="G" onchange="setProfil('sexe','G')"><span><b>Garçon</b></span></label><label class="sx"><input type="radio" name="psexe" value="F" onchange="setProfil('sexe','F')"><span><b>Fille</b></span></label></div>
     <p class="small">Le sexe sert à lire le barème. Tout reste sur cet appareil.</p>
+    <p class="small" id="offNote"></p>
   </div>
   <div class="card"><h2>Mes performances</h2>
     <div id="carList"></div>
@@ -744,7 +745,7 @@ function showTab(n){
   closeSheet();$('toast').classList.remove('show');
   $('scroll').scrollTop=0;
   [1,2,3,4,5].forEach(i=>{$('tab'+i).classList.toggle('hidden',n!==i);const b=$('tabBtn'+i);if(b)b.classList.toggle('active',n===i);});
-  if(n===2)renderContrats(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();} if(n===5)coachRender();
+  if(n===2)renderContrats(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
 }
 
 /* ---------- Score ---------- */
@@ -1023,6 +1024,17 @@ function coachCsv(){
 
 /* ---------- Démarrage ---------- */
 renderPerf();majProfChip();
+
+/* ---------- Utilisation hors ligne ---------- */
+function offlineStatus(){
+  const el=document.getElementById('offNote');if(!el)return;
+  if(!('serviceWorker' in navigator)){el.textContent="Ce navigateur ne permet pas l'utilisation hors ligne.";return;}
+  el.textContent=navigator.serviceWorker.controller?"✓ L'application est disponible hors ligne sur cet appareil.":"Ouvre l'application une fois avec du réseau, puis recharge-la : elle fonctionnera ensuite hors ligne.";
+}
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').then(()=>navigator.serviceWorker.ready).then(offlineStatus).catch(()=>{});});
+  navigator.serviceWorker.addEventListener('controllerchange',offlineStatus);
+}
 </script>
 </body>
 </html>

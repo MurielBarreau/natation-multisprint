@@ -546,6 +546,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .rk{font-weight:800;font-size:14px}.rv{font-size:40px;font-weight:900;line-height:1.1}.rs{font-size:13px}
 .perfSum{margin:6px 0 0;font-size:14px}
 .warnLink{width:100%;border:0;border-radius:14px;padding:12px;margin-bottom:10px;background:linear-gradient(135deg,#FF914D,#FFC46B);color:#3A1500;font-weight:800;text-align:left;font-size:14px}
+.chart .cok{font:900 10.5px Nunito,sans-serif;fill:#1E8A4C}.chart .cko{font:900 10.5px Nunito,sans-serif;fill:#D9480F}.chart .cband{font:700 8px Nunito,sans-serif;fill:#2E7D5B}
 </style>
 </head>
 <body>
@@ -595,7 +596,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
         <tr><th>Temps (s)</th><td><input type="number" step="0.01" inputmode="decimal" id="t0" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t1" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t2" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t3" oninput="readInputs(true)"></td></tr>
         <tr><th>CB</th><td><input type="number" inputmode="numeric" id="cb0" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb1" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb2" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb3" oninput="readInputs()"></td></tr>
         <tr><th>Vitesse (m/s)</th><td id="v0"></td><td id="v1"></td><td id="v2"></td><td id="v3"></td></tr>
-        <tr><th>Fréquence</th><td id="f0"></td><td id="f1"></td><td id="f2"></td><td id="f3"></td></tr>
+        <tr><th>Fréquence (cy/min)</th><td id="f0"></td><td id="f1"></td><td id="f2"></td><td id="f3"></td></tr>
         <tr><th>Score</th><td id="s0"></td><td id="s1"></td><td id="s2"></td><td id="s3"></td></tr>
       </tbody>
     </table>
@@ -688,7 +689,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <h1 class="t1">Enseignant / Coach</h1>
   <div class="card">
     <button class="plink" onclick="showTab(1)">← Retour à l'application</button>
-    <p class="small" style="margin-top:6px">Observe plusieurs nageurs ou nageuses : un chrono par nageur (4 sprints, option choisie pour chaque série), temps enregistrés seuls, puis ajoute les CB. Scores, écarts et CB/min se calculent seuls. Les observations restent sur cet appareil.</p>
+    <p class="small" style="margin-top:6px">Observe plusieurs nageurs ou nageuses : un chrono par nageur (4 sprints, option choisie pour chaque série), temps enregistrés seuls, puis ajoute les CB. Scores, écarts et fréquences se calculent seuls. Les observations restent sur cet appareil.</p>
     <div id="coachList"></div>
     <div class="btnbar"><button class="printbtn sec" onclick="coachAdd()">+ Nageur</button><button class="printbtn" onclick="coachCsv()">Export CSV</button></div>
     <button class="plink" style="margin-top:8px" onclick="coachClear()">Tout effacer</button>
@@ -823,7 +824,7 @@ function renderPerf(keepInputs){
     $('o'+i).textContent=String(S.opt[Math.floor(i/2)]);
     const t=S.t[i],c=S.cb[i],s=sc(i);
     $('v'+i).textContent=t>0?(20/t).toFixed(2):'';
-    $('f'+i).textContent=(t>0&&c>0)?Math.round(c/t*60):'';
+    $('f'+i).textContent=(t>0&&c>0)?(c*30/t).toFixed(1):'';
     $('s'+i).textContent=s===null?'':s;$('s'+i).style.background=s===null?'':heat(s);$('s'+i).style.fontWeight=800;
   }
   if(!keepInputs){fillInputs();}
@@ -840,13 +841,13 @@ function cmpPair(a,b,title){
   const dt=S.t[b]-S.t[a],hasCB=S.cb[a]>0&&S.cb[b]>0,dc=hasCB?S.cb[b]-S.cb[a]:null;
   let cls='ok',msg;
   if(dt>3){cls='ko';msg='Plus de 3 s d\'écart entre les 2 sprints : la récupération choisie était-elle adaptée ? (CP3)';}
-  else if(dc!==null&&dc>=3){cls='ko';msg='Tu perds de l\'amplitude : plus de CB au 2e sprint. Garde la longueur du trajet moteur. (CP2)';}
+  else if(dc!==null&&dc>3){cls='ko';msg='Tu perds de l\'amplitude : plus de CB au 2e sprint. Garde la longueur du trajet moteur. (CP2)';}
   else msg='Vitesse et amplitude bien conservées sur les 2 sprints.';
   return '<h3 style="margin-top:0">'+title+'</h3><p class="small">Écart de temps : <b>'+(dt>0?'+':'')+dt.toFixed(2)+' s</b>'+(dc!==null?' · Écart de CB : <b>'+(dc>0?'+':'')+dc+'</b>':'')+'</p><div class="msgbox '+cls+'">'+msg+'</div>';
 }
 function renderCmp(){
   const h=cmpPair(0,1,'Série 1 : sprint 2 / sprint 1')+cmpPair(2,3,'Série 2 : sprint 4 / sprint 3');
-  $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères : pas plus de 3 s d\'écart de temps, et un écart de CB &lt; 3.)</p>';
+  $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères : pas plus de 3 s d\'écart de temps, et un écart de CB ≤ 3.)</p>';
 }
 
 /* ---------- Contrats ---------- */
@@ -899,29 +900,37 @@ function openCarnet(){
   $('sheet1').classList.add('show');document.documentElement.classList.add('has-sheet');$('scroll').scrollTop=0;
 }
 const fdate=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
-const freqOf=(t,c)=>(t>0&&c>0)?Math.round(c/t*60):null;
-function barChart(title,vals,dec,best){
-  const v=vals.filter(x=>x!==null),mx=Math.max(...v),mn=Math.min(...v),fl=mn*0.7,rg=Math.max(mx-fl,1e-9);
-  let o='<svg class="chart" viewBox="0 0 240 142" role="img" aria-label="'+esc(title)+'"><text x="120" y="14" text-anchor="middle" class="ct">'+esc(title)+'</text>';
-  [0,1,2,3].forEach(i=>{const x=vals[i],g=i>>1,k=i&1,bx=(g?175:65)+(k?4:-40);
-    if(x!==null){const h=Math.max(6,(x-fl)/rg*62),y=104-h;
-      o+='<rect x="'+bx+'" y="'+y+'" width="36" height="'+h+'" rx="6" fill="'+(k?'#34B98A':'#1C9BD6')+'"/><text x="'+(bx+18)+'" y="'+(y-4)+'" text-anchor="middle" class="cv">'+x.toFixed(dec)+'</text>'+(best===i?'<text x="'+(bx+18)+'" y="'+(y-17)+'" text-anchor="middle" class="cstar">★</text>':'');}
-    o+='<text x="'+(bx+18)+'" y="118" text-anchor="middle" class="cs">S'+(i+1)+'</text>';});
-  return o+'<text x="65" y="136" text-anchor="middle" class="cg">Série 1</text><text x="175" y="136" text-anchor="middle" class="cg">Série 2</text></svg>';
+const freqOf=(t,c)=>(t>0&&c>0)?Math.round(c*300/t)/10:null; /* cycles/min : 1 cycle = 2 CB */
+const STAB={t:3,cb:3,f:3};
+function stabChart(title,vals,dec,tol,unit,best){
+  const v=vals.filter(x=>x!==null);
+  let o='<svg class="chart" viewBox="0 0 240 160" role="img" aria-label="'+esc(title)+'"><text x="120" y="14" text-anchor="middle" class="ct">'+esc(title)+'</text>';
+  if(v.length<2)return o+'<text x="120" y="85" text-anchor="middle" class="cs">Pas assez de données</text></svg>';
+  const mx=Math.max(...v),mn=Math.min(...v),rg=mx-mn,ok=rg<=tol+1e-9,c=(mx+mn)/2,half=Math.max(tol*0.9,rg/2*1.3),y0=44,y1=116,Y=x=>y1-(x-(c-half))/(2*half)*(y1-y0),xs=[40,90,150,200];
+  o+='<text x="120" y="27" text-anchor="middle" class="'+(ok?'cok':'cko')+'">'+(ok?'✓ Stable':'⚠ Variable')+' · écart max '+rg.toFixed(dec)+' '+unit+'</text>';
+  o+='<rect x="14" y="32" width="106" height="98" rx="8" fill="#EEF5FB"/><rect x="124" y="32" width="106" height="98" rx="8" fill="#EDF8F2"/>';
+  const bt=Y(c+tol/2),bb=Y(c-tol/2);
+  o+='<rect x="14" y="'+bt+'" width="216" height="'+(bb-bt)+'" fill="rgba(52,185,138,.25)"/>';
+  const pts=[0,1,2,3].filter(i=>vals[i]!==null).map(i=>xs[i]+','+Y(vals[i]));
+  o+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#145DA0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  [0,1,2,3].forEach(i=>{const x=vals[i];if(x===null)return;const y=Y(x),inb=Math.abs(x-c)<=tol/2+1e-9,ly=y<46?y+17:y-9;
+    o+='<circle cx="'+xs[i]+'" cy="'+y+'" r="5.5" fill="'+(inb?'#2E9E5B':'#F08C00')+'" stroke="#fff" stroke-width="1.5"/><text x="'+xs[i]+'" y="'+ly+'" text-anchor="middle" class="cv">'+x.toFixed(dec)+'</text>'+(best===i?'<text x="'+xs[i]+'" y="'+(ly-12)+'" text-anchor="middle" class="cstar">★</text>':'');});
+  [0,1,2,3].forEach(i=>{o+='<text x="'+xs[i]+'" y="142" text-anchor="middle" class="cs">S'+(i+1)+'</text>';});
+  return o+'<text x="65" y="156" text-anchor="middle" class="cg">Série 1</text><text x="175" y="156" text-anchor="middle" class="cg">Série 2</text></svg>';
 }
 function tilesFrom(t,cb,s){return '<div class="tiles">'+[0,1,2,3].map(i=>'<div class="stile" style="'+(s[i]==null?'':'background:'+heat(s[i]))+'"><b>S'+(i+1)+'</b><span>'+(t[i]>0?(+t[i]).toFixed(2)+' s':'— s')+'</span><span>'+(cb[i]>0?cb[i]+' CB':'— CB')+'</span><strong>'+(s[i]==null?'—':s[i]+' pts')+'</strong></div>').join('')+'</div>';}
 function perfCard(e,i,pdf){
   const tt=e.t.map(x=>x>0?+x:null),cc=e.cb.map(x=>x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
   let best=-1;tt.forEach((x,j)=>{if(x!==null&&(best<0||x<tt[best]))best=j;});
-  const bh=best>=0?'<div class="bestBox"><span class="bk">★ Meilleur sprint</span><span class="bv">S'+(best+1)+' · <b>'+tt[best].toFixed(2)+' s</b></span><span>'+(cc[best]!==null?cc[best]+' CB':'— CB')+'</span><span>'+(f[best]!==null?'fréquence <b>'+f[best]+'</b> CB/min':'')+'</span></div>':'';
+  const bh=best>=0?'<div class="bestBox"><span class="bk">★ Meilleur sprint</span><span class="bv">S'+(best+1)+' · <b>'+tt[best].toFixed(2)+' s</b></span><span>'+(cc[best]!==null?cc[best]+' CB':'— CB')+'</span><span>'+(f[best]!==null?'fréquence <b>'+f[best]+'</b> cycles/min':'')+'</span></div>':'';
   return '<div class="perfCard"><div class="perfHead"><div><b>'+fdate(e.d)+'</b> · '+esc(optTxt(e.opt))+(e.manual?' · saisie à la main':'')+'</div>'+(pdf?'':'<button class="btn-s warn" onclick="delCar('+i+')" aria-label="Supprimer">✕</button>')+'</div>'+bh+tilesFrom(e.t,e.cb,e.s)+
-   '<div class="charts">'+barChart('Temps (s)',tt,2,best)+barChart('Coups de bras (CB)',cc,0,-1)+barChart('Fréquence (CB/min)',f,0,-1)+'</div>'+
+   '<div class="charts">'+stabChart('Temps (s)',tt,2,STAB.t,'s',best)+stabChart('Coups de bras (CB)',cc,0,STAB.cb,'CB',-1)+stabChart('Fréquence (cycles/min)',f,1,STAB.f,'cy/min',-1)+'</div><p class="small" style="margin:0">Zone verte = zone de stabilité (écart max : 3 s, 3 CB, 3 cycles/min). Point vert : sprint dans la zone ; point orange : sprint en dehors.</p>'+
    '<p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p></div>';
 }
 function recordCard(){
   let b=null;CAR.forEach(e=>e.t.forEach((t,j)=>{if(t>0&&(!b||t<b.t))b={t:+t,cb:e.cb[j],d:e.d,j};}));
   if(!b)return '';const f=freqOf(b.t,b.cb);
-  return '<div class="recordCard"><div class="rk">★ Mon record sur un sprint</div><div class="rv">'+b.t.toFixed(2)+' s</div><div class="rs">'+(b.cb>0?b.cb+' CB':'')+(f!==null?' · fréquence '+f+' CB/min':'')+' · sprint '+(b.j+1)+' du '+fdate(b.d)+'</div></div>';
+  return '<div class="recordCard"><div class="rk">★ Mon record sur un sprint</div><div class="rv">'+b.t.toFixed(2)+' s</div><div class="rs">'+(b.cb>0?b.cb+' CB':'')+(f!==null?' · fréquence '+f+' cycles/min':'')+' · sprint '+(b.j+1)+' du '+fdate(b.d)+'</div></div>';
 }
 function renderCarnet(){
   $('carList').innerHTML=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i)).join(''):'<p class="small">Aucune performance enregistrée.</p>');
@@ -975,10 +984,10 @@ function coachSeg(id){const r=coachRun[id];return !r?'':(r.ph==='run'?'vite':'re
 function coachChronoUI(id){const o=obs(id),el=$('cc_'+id);if(!o||!el)return;el.innerHTML=coachChronoHTML(o);el.dataset.seg=coachSeg(id);}
 function coachDerived(o){
   if(!o.sexe)return '<div class="msgbox ko">Choisis garçon ou fille : le barème en dépend.</div>';
-  const T=coachTot(o),fq=[0,1,2,3].map(i=>(o.t[i]>0&&o.cb[i]>0)?Math.round(o.cb[i]/o.t[i]*60):'—').join(' · ');
-  const pills=[[0,1],[2,3]].map(([a,b])=>{if(!(o.t[a]>0&&o.t[b]>0))return '';const dt=o.t[b]-o.t[a],dc=(o.cb[a]>0&&o.cb[b]>0)?o.cb[b]-o.cb[a]:null,ok=dt<=3&&(dc===null||dc<3);
+  const T=coachTot(o),fq=[0,1,2,3].map(i=>(o.t[i]>0&&o.cb[i]>0)?(o.cb[i]*30/o.t[i]).toFixed(1):'—').join(' · ');
+  const pills=[[0,1],[2,3]].map(([a,b])=>{if(!(o.t[a]>0&&o.t[b]>0))return '';const dt=o.t[b]-o.t[a],dc=(o.cb[a]>0&&o.cb[b]>0)?o.cb[b]-o.cb[a]:null,ok=dt<=3&&(dc===null||dc<=3);
     return '<span class="cpill '+(ok?'ok':'wa')+'">'+(ok?'✓ ':'⚠ ')+'S'+(b+1)+'−S'+(a+1)+' : '+(dt>0?'+':'')+dt.toFixed(2)+' s'+(dc!==null?' · '+(dc>0?'+':'')+dc+' CB':'')+'</span>';}).join('');
-  return '<div class="fq"><b>Fréquence</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>';}
+  return '<div class="fq"><b>Fréquence (cy/min)</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>';}
 function coachRefresh(id){const o=obs(id),a=$('cd_'+id);if(o&&a)a.innerHTML=coachDerived(o);}
 function coachSyncInputs(o){for(let i=0;i<4;i++){const a=$('ci_'+o.id+'_t_'+i),b=$('ci_'+o.id+'_cb_'+i);if(a)a.value=o.t[i]??'';if(b)b.value=o.cb[i]??'';}}
 function coachIn(id,grp,i,v){const o=obs(id);if(!o)return;if(grp==='nom')o.nom=v;else o[grp][i]=num(v);coachSave();coachRefresh(id);if(grp==='t'&&!coachRun[id])coachChronoUI(id);}

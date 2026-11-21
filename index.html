@@ -512,14 +512,40 @@ button,.big,.printbtn,.btn-s,.seg button,.plink,nav button,.profChip{box-shadow:
 .cpCard.c2 h3{background:linear-gradient(135deg,#0B8A94,#4CC38A)}
 .cpCard.c3 h3{background:linear-gradient(135deg,#D9480F,#F59F00)}
 .barWrap{overflow-x:auto;border-radius:14px}
-.bar{font-size:11px;min-width:660px;margin-top:0}
-.bar td{padding:5px 2px;font-weight:700;color:var(--ink)}
-.bar td.nul{background:#F2F5F8 !important;color:transparent}
-.bar td.hit{outline:3px solid var(--ink);outline-offset:-3px;font-weight:900}
-.bar sup{font-size:9px;font-weight:900}
+.bmat{font-size:11px;min-width:660px;margin-top:0}
+.bmat td{padding:5px 2px;font-weight:700;color:var(--ink)}
+.bmat td.nul{background:#F2F5F8 !important;color:transparent}
+.bmat td.hit{outline:3px solid var(--ink);outline-offset:-3px;font-weight:900}
+.bmat sup{font-size:9px;font-weight:900}
 .sheet h3.secP{background:linear-gradient(135deg,#145DA0,#0CC0DF);color:#fff;padding:7px 12px;border-radius:10px;margin:18px 0 8px}
 .sheet table{font-size:13px}
 html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll>footer{display:none}
+
+.bmat{table-layout:fixed;width:100% !important;min-width:0 !important;font-size:9px !important;border-collapse:separate;border-spacing:1px;margin-top:0}
+.bmat th,.bmat td{padding:3px 0 !important;text-align:center;font-size:9px !important;line-height:1.2;overflow:hidden}
+.bmat th:first-child{width:34px}
+.bmat td.hit{outline:none !important;padding:1px 0 !important}
+.bmat td.nul{background:#F2F5F8 !important;color:transparent}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:99px;background:#0B2545;color:#fff;font-size:10px;font-weight:900;padding:0 2px;box-sizing:border-box}
+.leg{display:flex;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.leg .badge{min-width:22px;height:22px;font-size:13px}
+.chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.chipRow .profChip{margin-top:0}
+
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:10px 0}
+.chart{width:100% !important;height:auto !important;display:block;background:#fff;border:1px solid var(--border);border-radius:14px}
+.chart .ct{font:800 12px Nunito,sans-serif;fill:#0B2545}
+.chart .cv{font:800 11px Nunito,sans-serif;fill:#0B2545}
+.chart .cs{font:700 10px Nunito,sans-serif;fill:#47627A}
+.chart .cg{font:800 11px Nunito,sans-serif;fill:#145DA0}
+.chart .cstar{font:900 13px Nunito,sans-serif;fill:#F59F00}
+.perfCard{border:1px solid var(--border);border-radius:18px;padding:12px;margin:12px 0;background:#fff;break-inside:avoid;page-break-inside:avoid}
+.perfHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.bestBox{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;border-radius:14px;padding:10px 14px;margin:6px 0 10px;color:#3A1500;background:linear-gradient(135deg,#FFD66B,#FF9F43);font-size:14px}
+.bestBox .bk{font-weight:900}.bestBox .bv{font-size:17px}
+.recordCard{border-radius:20px;padding:14px 18px;color:#fff;margin:4px 0 12px;background:linear-gradient(135deg,#D9480F,#F59F00 70%,#FFD66B)}
+.rk{font-weight:800;font-size:14px}.rv{font-size:40px;font-weight:900;line-height:1.1}.rs{font-size:13px}
+.perfSum{margin:6px 0 0;font-size:14px}
+.warnLink{width:100%;border:0;border-radius:14px;padding:12px;margin-bottom:10px;background:linear-gradient(135deg,#FF914D,#FFC46B);color:#3A1500;font-weight:800;text-align:left;font-size:14px}
 </style>
 </head>
 <body>
@@ -531,7 +557,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <div class="brandRow">
     <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="rgba(255,255,255,.22)"/><path d="M27 6 14.5 25H23l-2.5 14L34 19h-8.5z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 42c3-2.4 6-2.4 9 0s6 2.4 9 0 6-2.4 9 0 3.5 1.2 5 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
     <div><p class="brand">CA1 - Natation Multisprint</p><p class="sub">Lycée Théas</p>
-      <button id="profChip" class="profChip" onclick="showTab(4)">Choisir un profil</button></div>
+      <div class="chipRow"><button id="profChip" class="profChip" onclick="showTab(4)">Choisir un profil</button><button class="profChip" onclick="showTab(5)">Enseignant / Coach</button></div></div>
   </div>
 </header>
 <main>
@@ -545,7 +571,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div class="pillsOpt"><label class="o1"><input type="radio" name="opt0" value="1" onchange="setOpt(0,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt0" value="2" onchange="setOpt(0,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt0" value="3" onchange="setOpt(0,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
     <h3 style="margin-top:4px">Série 2 · option de récupération</h3>
     <div class="pillsOpt"><label class="o1"><input type="radio" name="opt1" value="1" onchange="setOpt(1,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt1" value="2" onchange="setOpt(1,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt1" value="3" onchange="setOpt(1,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
-    <p class="small">Récup avec 25 m nage libre inclus (options 1 et 2). Bonus total = moyenne des bonus des deux séries.</p>
+    <p class="small">Récup avec 25 m nage libre inclus (options 1 et 2). Tu marques le bonus de ton option pour chaque série effectuée.</p>
     <div id="disp">0.00</div>
     <div id="lbl">Prêt — choisis ton option puis lance le sprint 1</div>
     <div class="btnrow">
@@ -558,6 +584,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 
   <div class="card">
     <h2>Mes résultats<small>Ils se calculent au fur et à mesure</small></h2>
+    <div id="sexeWarn"></div>
     <div id="hero"></div>
     <div id="tiles"></div>
     <h3 style="margin-top:4px">Je saisis ou je corrige<small class="small" style="display:block;font-weight:600">Temps en s, CB sur 20 m</small></h3>
@@ -568,7 +595,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
         <tr><th>Temps (s)</th><td><input type="number" step="0.01" inputmode="decimal" id="t0" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t1" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t2" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t3" oninput="readInputs(true)"></td></tr>
         <tr><th>CB</th><td><input type="number" inputmode="numeric" id="cb0" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb1" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb2" oninput="readInputs()"></td><td><input type="number" inputmode="numeric" id="cb3" oninput="readInputs()"></td></tr>
         <tr><th>Vitesse (m/s)</th><td id="v0"></td><td id="v1"></td><td id="v2"></td><td id="v3"></td></tr>
-        <tr><th>CB / min</th><td id="f0"></td><td id="f1"></td><td id="f2"></td><td id="f3"></td></tr>
+        <tr><th>Fréquence</th><td id="f0"></td><td id="f1"></td><td id="f2"></td><td id="f3"></td></tr>
         <tr><th>Score</th><td id="s0"></td><td id="s1"></td><td id="s2"></td><td id="s3"></td></tr>
       </tbody>
     </table>
@@ -583,7 +610,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <h2>Enregistrer ma performance</h2>
     <div class="btnbar"><button class="printbtn" onclick="saveCarnet()">Enregistrer</button><button class="printbtn sec" onclick="partager()">Partager</button></div>
   </div>
-  <button class="coachLink" onclick="showTab(5)">Mode Enseignant / Coach →</button>
+
 </div>
 
 <!-- TAB 2 : Contrats -->
@@ -694,7 +721,7 @@ const OPT={1:{rec:180,bonus:0,txt:"3'00"},2:{rec:90,bonus:30,txt:"1'30"},3:{rec:
 /* Barème du fichier Bingo : points selon le temps (ligne) et les CB (colonne). Même grille de points pour filles et garçons. */
 const BAR={"G":{"cb0":20,"t":[15.0,15.7,16.4,17.1,17.8,18.5,19.2,19.9,20.6,22.0,22.6,23.2,23.8,24.6,25.2,26.8,27.4,28.0,29.0,30.0],"rows":[[50,49,48,47,46,45,44,43,42,41,40,39,38],[48,47,46,45,44,43,42,41,40,39,38,37,36],[46,45,44,43,42,41,40,39,38,37,36,35,34,33],[44,43,42,41,40,39,38,37,36,35,34,33,32,31,30],[42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27],[40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24],[38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21],[36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18],[34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15],[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13],[31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12],[30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11],[29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10],[28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9],[27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8],[26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7],[25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6],[24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5],[23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4],[22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3]]},"F":{"cb0":23,"t":[19.0,19.7,20.4,21.1,21.8,22.5,23.3,23.9,24.6,26.0,26.6,27.2,27.8,28.6,29.2,29.8,30.4,31.0,32.0,33.0],"rows":[[50,49,48,47,46,45,44,43,42,41,40,39,38],[48,47,46,45,44,43,42,41,40,39,38,37,36],[46,45,44,43,42,41,40,39,38,37,36,35,34,33],[44,43,42,41,40,39,38,37,36,35,34,33,32,31,30],[42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27],[40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24],[38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21],[36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18],[34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15],[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13],[31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12],[30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11],[29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10],[28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9],[27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8],[26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7],[25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6],[24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5],[23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4],[22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3]]}};
 function scoreOf(sx,t,c){
-  if(!(t>0)||!(c>0))return null;const g=BAR[sx];
+  if(!(t>0)||!(c>0)||!BAR[sx])return null;const g=BAR[sx];
   const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)return 0;
   const j=Math.max(0,Math.round(c)-g.cb0),row=g.rows[r];
   return j<row.length?row[j]:0;
@@ -704,7 +731,7 @@ if(!Array.isArray(S.opt))S.opt=[S.opt||1,S.opt||1];
 let C=ld('contrats',[]);
 let CAR=ld('carnet',[]);
 const savePerf=()=>sv('perf',S);
-let P=Object.assign({prenom:'',nom:'',classe:'',sexe:'G'},ld('profil',{}));S.sexe=P.sexe;
+let P=Object.assign({prenom:'',nom:'',classe:'',sexe:''},ld('profil',{}));S.sexe=P.sexe;
 const nomProfil=()=>(P.prenom+' '+P.nom).trim();
 function majProfChip(){const n=nomProfil();$('profChip').textContent=n?n+(P.classe?' · '+P.classe:''):'Choisir un profil';}
 const heat=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 78% 82%)';
@@ -714,7 +741,7 @@ function tilesHTML(){return '<div class="tiles">'+[0,1,2,3].map(i=>{const p=sc(i
 
 /* ---------- Navigation ---------- */
 function showTab(n){
-  closeSheet();
+  closeSheet();$('toast').classList.remove('show');
   $('scroll').scrollTop=0;
   [1,2,3,4,5].forEach(i=>{$('tab'+i).classList.toggle('hidden',n!==i);const b=$('tabBtn'+i);if(b)b.classList.toggle('active',n===i);});
   if(n===2)renderContrats(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();} if(n===5)coachRender();
@@ -722,13 +749,13 @@ function showTab(n){
 
 /* ---------- Score ---------- */
 const sc=i=>scoreOf(S.sexe,S.t[i],S.cb[i]);
-const bonusOf=o=>(OPT[o[0]].bonus+OPT[o[1]].bonus)/2;
+const bonusSeries=(opt,s)=>[0,1].reduce((a,j)=>a+((s[2*j]!==null&&s[2*j+1]!==null)?OPT[opt[j]].bonus:0),0);
 const optTxt=o=>Array.isArray(o)?(o[0]===o[1]?'option '+o[0]:'options '+o[0]+'/'+o[1]):'option '+o;
 const nbOk=()=>C.filter(c=>c.ok).length;
 const ptsContrats=()=>{const n=nbOk();return n>2?50:n===2?40:n===1?20:0;};
 function totals(){
   const s=[0,1,2,3].map(sc),done=s.filter(x=>x!==null).length,sum=s.reduce((a,x)=>a+(x||0),0);
-  const bonus=done?bonusOf(S.opt):0,ct=ptsContrats(),total=sum+bonus+ct;
+  const bonus=bonusSeries(S.opt,s),ct=ptsContrats(),total=sum+bonus+ct;
   let note=null;
   if(done===4){note=total>=75?Math.min(20,5+Math.floor((total-75)/15)):(S.opt[0]===1&&S.opt[1]===1?5:null);}
   return{s,done,sum,bonus,ct,total,note};
@@ -801,6 +828,7 @@ function renderPerf(keepInputs){
   if(!keepInputs){fillInputs();}
   $('manualWarn').textContent=S.manual?'Valeurs saisies à la main : elles porteront la mention « saisie à la main » dans le carnet.':'';
   const T=totals();
+  $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="showTab(4)">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
   $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML();
   renderCmp();
   const chips=[];for(let i=0;i<4;i++)if(S.t[i]>0)chips.push('<span class="chip">S'+(i+1)+' · '+S.t[i].toFixed(2)+' s</span>');
@@ -810,14 +838,14 @@ function cmpPair(a,b,title){
   if(!(S.t[a]>0&&S.t[b]>0))return '';
   const dt=S.t[b]-S.t[a],hasCB=S.cb[a]>0&&S.cb[b]>0,dc=hasCB?S.cb[b]-S.cb[a]:null;
   let cls='ok',msg;
-  if(dt>1){cls='ko';msg='Le 2e sprint est nettement plus lent. La récupération choisie était-elle adaptée ? (CP3)';}
+  if(dt>3){cls='ko';msg='Plus de 3 s d\'écart entre les 2 sprints : la récupération choisie était-elle adaptée ? (CP3)';}
   else if(dc!==null&&dc>=3){cls='ko';msg='Tu perds de l\'amplitude : plus de CB au 2e sprint. Garde la longueur du trajet moteur. (CP2)';}
   else msg='Vitesse et amplitude bien conservées sur les 2 sprints.';
   return '<h3 style="margin-top:0">'+title+'</h3><p class="small">Écart de temps : <b>'+(dt>0?'+':'')+dt.toFixed(2)+' s</b>'+(dc!==null?' · Écart de CB : <b>'+(dc>0?'+':'')+dc+'</b>':'')+'</p><div class="msgbox '+cls+'">'+msg+'</div>';
 }
 function renderCmp(){
   const h=cmpPair(0,1,'Série 1 : sprint 2 / sprint 1')+cmpPair(2,3,'Série 2 : sprint 4 / sprint 3');
-  $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères indicatifs : écart de temps ≤ 1 s, écart de CB &lt; 3.)</p>';
+  $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères : pas plus de 3 s d\'écart de temps, et un écart de CB &lt; 3.)</p>';
 }
 
 /* ---------- Contrats ---------- */
@@ -840,24 +868,24 @@ function renderBilan(){
   $('bilanNote').innerHTML=T.note!==null?'':'<div class="msgbox ko">'+(T.done<4?'La note s\'affiche quand les 4 sprints sont renseignés.':'Moins de 75 pts : note à définir avec ton enseignant.')+'</div>';
   const L=[],ok=[0,1,2,3].filter(i=>T.s[i]!==null);
   if(ok.length){const best=ok.reduce((a,i)=>T.s[i]>T.s[a]?i:a,ok[0]);L.push('Ton meilleur sprint : le <b>sprint '+(best+1)+'</b> ('+T.s[best]+' pts).');}
-  [[0,1],[2,3]].forEach(([a,b],n)=>{if(S.t[a]>0&&S.t[b]>0){const dt=S.t[b]-S.t[a];L.push('Série '+(n+1)+' : '+(dt>1?'tu ralentis au 2e sprint, pense à ta récupération (CP3).':'tu tiens ta vitesse au 2e sprint.'));}});
-  if(T.done===4&&Math.min(S.opt[0],S.opt[1])<3&&!L.some(x=>/ralentis/.test(x)))L.push('Tu tiens bien sur 2 sprints : l\'option suivante te rapporterait plus de points. À tester ?');
+  [[0,1],[2,3]].forEach(([a,b],n)=>{if(S.t[a]>0&&S.t[b]>0){const dt=S.t[b]-S.t[a];L.push('Série '+(n+1)+' : '+(dt>3?'plus de 3 s d\'écart entre tes 2 sprints, pense à ta récupération (CP3).':'tu tiens ta vitesse au 2e sprint.'));}});
+  if(T.done===4&&Math.min(S.opt[0],S.opt[1])<3&&!L.some(x=>/écart entre tes/.test(x)))L.push('Tu tiens bien sur 2 sprints : l\'option suivante te rapporterait plus de points. À tester ?');
   $('bilanTxt').innerHTML=L.length?'<ul>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'<p class="small">Fais ta performance pour obtenir ton bilan.</p>';
   renderBarMine();
 }
 
 /* ---------- Carnet ---------- */
 function saveCarnet(){
-  if(!nomProfil()){toast('Renseigne ton profil (prénom, nom) dans le Carnet');showTab(4);return;}
+  if(!nomProfil()||!P.sexe){showTab(4);toast('Renseigne ton profil : prénom, nom, fille ou garçon');return;}
   const T=totals();
   if(T.done===0){toast('Renseigne au moins un sprint');return;}
   CAR.unshift({d:new Date().toISOString().slice(0,10),nom:nomProfil(),classe:P.classe,sexe:S.sexe,opt:S.opt.slice(),t:S.t.slice(),cb:S.cb.slice(),s:T.s,bonus:T.bonus,ct:T.ct,total:T.total,note:T.note,manual:S.manual});
   sv('carnet',CAR);toast('Enregistré dans le carnet');
 }
 function openCarnet(){
-  if(!nomProfil()){toast('Renseigne ton profil (prénom, nom) ci-dessus');return;}
+  if(!nomProfil()||!P.sexe){toast('Renseigne ton profil : prénom, nom, fille ou garçon');return;}
   const fd=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
-  const perf=CAR.length?CAR.map(e=>'<h3>'+fd(e.d)+' · '+esc(optTxt(e.opt))+(e.manual?' (saisie à la main)':'')+'</h3><table><tr><th></th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr><tr><th>Temps (s)</th>'+e.t.map(x=>'<td>'+(x??'—')+'</td>').join('')+'</tr><tr><th>CB</th>'+e.cb.map(x=>'<td>'+(x??'—')+'</td>').join('')+'</tr><tr><th>Score</th>'+e.s.map(x=>'<td style="background:'+(x===null?'#fff':heat(x))+'">'+(x??'—')+'</td>').join('')+'</tr></table><p>Bonus options +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+' / 20</b>':'')+'</p>').join(''):'<p>Aucune performance enregistrée.</p>';
+  const perf=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i,true)).join(''):'<p>Aucune performance enregistrée.</p>');
   const ctr=C.length?'<table><tr><th>Contrat</th><th>Temps visé</th><th>CB visés</th><th>Validé</th></tr>'+C.map(c=>'<tr><td style="text-align:left">'+esc(c.txt||'Contrat')+'</td><td>'+(c.t>0?c.t+' s':'—')+'</td><td>'+(c.cb>0?c.cb:'—')+'</td><td>'+(c.ok?'✓':'—')+'</td></tr>').join('')+'</table><p><b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b></p>':'<p>Aucun contrat pour l\'instant.</p>';
   renderBilan();
   let evo='';if(CAR.length>=2){const a=CAR[CAR.length-1],b=CAR[0],d=b.total-a.total;evo='<p>Évolution entre ma première et ma dernière performance : <b>'+(d>0?'+':'')+d+' pts</b> ('+a.total+' → '+b.total+').</p>';}
@@ -869,8 +897,33 @@ function openCarnet(){
    '<div class="no-print"><div class="btnbar"><button class="printbtn" onclick="window.print()">Enregistrer en PDF</button><button class="printbtn sec" onclick="closeSheet()">Fermer</button></div><p class="small">Dans la fenêtre qui s\'ouvre, choisis « Enregistrer au format PDF » (sur téléphone : « Imprimer » puis « Enregistrer en PDF »).</p></div>';
   $('sheet1').classList.add('show');document.documentElement.classList.add('has-sheet');$('scroll').scrollTop=0;
 }
+const fdate=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
+const freqOf=(t,c)=>(t>0&&c>0)?Math.round(c/t*60):null;
+function barChart(title,vals,dec,best){
+  const v=vals.filter(x=>x!==null),mx=Math.max(...v),mn=Math.min(...v),fl=mn*0.7,rg=Math.max(mx-fl,1e-9);
+  let o='<svg class="chart" viewBox="0 0 240 142" role="img" aria-label="'+esc(title)+'"><text x="120" y="14" text-anchor="middle" class="ct">'+esc(title)+'</text>';
+  [0,1,2,3].forEach(i=>{const x=vals[i],g=i>>1,k=i&1,bx=(g?175:65)+(k?4:-40);
+    if(x!==null){const h=Math.max(6,(x-fl)/rg*62),y=104-h;
+      o+='<rect x="'+bx+'" y="'+y+'" width="36" height="'+h+'" rx="6" fill="'+(k?'#34B98A':'#1C9BD6')+'"/><text x="'+(bx+18)+'" y="'+(y-4)+'" text-anchor="middle" class="cv">'+x.toFixed(dec)+'</text>'+(best===i?'<text x="'+(bx+18)+'" y="'+(y-17)+'" text-anchor="middle" class="cstar">★</text>':'');}
+    o+='<text x="'+(bx+18)+'" y="118" text-anchor="middle" class="cs">S'+(i+1)+'</text>';});
+  return o+'<text x="65" y="136" text-anchor="middle" class="cg">Série 1</text><text x="175" y="136" text-anchor="middle" class="cg">Série 2</text></svg>';
+}
+function tilesFrom(t,cb,s){return '<div class="tiles">'+[0,1,2,3].map(i=>'<div class="stile" style="'+(s[i]==null?'':'background:'+heat(s[i]))+'"><b>S'+(i+1)+'</b><span>'+(t[i]>0?(+t[i]).toFixed(2)+' s':'— s')+'</span><span>'+(cb[i]>0?cb[i]+' CB':'— CB')+'</span><strong>'+(s[i]==null?'—':s[i]+' pts')+'</strong></div>').join('')+'</div>';}
+function perfCard(e,i,pdf){
+  const tt=e.t.map(x=>x>0?+x:null),cc=e.cb.map(x=>x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
+  let best=-1;tt.forEach((x,j)=>{if(x!==null&&(best<0||x<tt[best]))best=j;});
+  const bh=best>=0?'<div class="bestBox"><span class="bk">★ Meilleur sprint</span><span class="bv">S'+(best+1)+' · <b>'+tt[best].toFixed(2)+' s</b></span><span>'+(cc[best]!==null?cc[best]+' CB':'— CB')+'</span><span>'+(f[best]!==null?'fréquence <b>'+f[best]+'</b> CB/min':'')+'</span></div>':'';
+  return '<div class="perfCard"><div class="perfHead"><div><b>'+fdate(e.d)+'</b> · '+esc(optTxt(e.opt))+(e.manual?' · saisie à la main':'')+'</div>'+(pdf?'':'<button class="btn-s warn" onclick="delCar('+i+')" aria-label="Supprimer">✕</button>')+'</div>'+bh+tilesFrom(e.t,e.cb,e.s)+
+   '<div class="charts">'+barChart('Temps (s)',tt,2,best)+barChart('Coups de bras (CB)',cc,0,-1)+barChart('Fréquence (CB/min)',f,0,-1)+'</div>'+
+   '<p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p></div>';
+}
+function recordCard(){
+  let b=null;CAR.forEach(e=>e.t.forEach((t,j)=>{if(t>0&&(!b||t<b.t))b={t:+t,cb:e.cb[j],d:e.d,j};}));
+  if(!b)return '';const f=freqOf(b.t,b.cb);
+  return '<div class="recordCard"><div class="rk">★ Mon record sur un sprint</div><div class="rv">'+b.t.toFixed(2)+' s</div><div class="rs">'+(b.cb>0?b.cb+' CB':'')+(f!==null?' · fréquence '+f+' CB/min':'')+' · sprint '+(b.j+1)+' du '+fdate(b.d)+'</div></div>';
+}
 function renderCarnet(){
-  $('carList').innerHTML=CAR.length?CAR.map((e,i)=>'<div class="chk-line" style="justify-content:space-between"><span><b>'+esc(e.d)+'</b> '+esc(e.nom||'')+' · '+optTxt(e.opt)+' · <b>'+e.total+' pts</b>'+(e.note!==null?' · '+e.note+'/20':'')+(e.manual?' <span class="small">(saisie à la main)</span>':'')+'</span><button class="btn-s warn" onclick="delCar('+i+')" aria-label="Supprimer">✕</button></div>').join(''):'<p class="small">Aucune performance enregistrée.</p>';
+  $('carList').innerHTML=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i)).join(''):'<p class="small">Aucune performance enregistrée.</p>');
 }
 function delCar(i){if(!confirm('Supprimer cette performance ?'))return;CAR.splice(i,1);sv('carnet',CAR);renderCarnet();}
 function exportCSV(){
@@ -888,17 +941,21 @@ function partager(){
 
 /* ---------- Barème visible (Bilan) ---------- */
 function renderBarMine(){
-  const g=BAR[S.sexe],n=20,hits={};
-  [0,1,2,3].forEach(i=>{const t=S.t[i],c=S.cb[i];if(!(t>0&&c>0))return;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)return;const j=Math.max(0,Math.round(c)-g.cb0);if(j<n)(hits[r+','+j]=hits[r+','+j]||[]).push(i+1);});
-  $('barMine').innerHTML='<div class="barWrap"><table class="bar"><tr><th>T \\ CB</th>'+Array.from({length:n},(_,i)=>'<th>'+(g.cb0+i)+'</th>').join('')+'</tr>'+g.t.map((t,r)=>'<tr><th>'+t+'</th>'+Array.from({length:n},(_,i)=>{const v=g.rows[r][i],h=hits[r+','+i],cl=[];if(v===undefined)cl.push('nul');if(h)cl.push('hit');return '<td'+(cl.length?' class="'+cl.join(' ')+'"':'')+(v===undefined?'':' style="background:'+heat(v)+'"')+'>'+(v===undefined?'':v)+(h?'<sup>S'+h.join('+S')+'</sup>':'')+'</td>';}).join('')+'</tr>').join('')+'</table></div>';
+  if(!S.sexe){$('barMine').innerHTML='<p class="small">Choisis ton genre (fille ou garçon) dans ton profil pour voir le barème qui te correspond.</p>';return;}
+  const F=S.sexe==='F',g=BAR[S.sexe],n=20,hits={},leg=[];
+  [0,1,2,3].forEach(i=>{const t=S.t[i],c=S.cb[i];if(!(t>0&&c>0))return;const r=g.t.findIndex(x=>t<=x+1e-9),p=sc(i);
+    leg.push('<div class="leg"><span class="badge">'+(i+1)+'</span><span>Sprint '+(i+1)+' : '+t.toFixed(2)+' s · '+c+' CB → <b>'+p+' pts</b>'+(r<0?' (temps hors tableau)':'')+'</span></div>');
+    if(r<0)return;const j=Math.max(0,Math.round(c)-g.cb0);if(j<n)(hits[r+','+j]=hits[r+','+j]||[]).push(i+1);});
+  $('barMine').innerHTML='<p class="small"><b>Barème '+(F?'filles':'garçons')+'</b> : 50 pts par sprint à '+(F?'19 s et 23 CB':'15 s et 20 CB')+' (ou mieux), soit 100 pts sur une série : le bingo.</p><table class="bmat"><tr><th>T \\ CB</th>'+Array.from({length:n},(_,i)=>'<th>'+(g.cb0+i)+'</th>').join('')+'</tr>'+g.t.map((t,r)=>'<tr><th>'+t+'</th>'+Array.from({length:n},(_,i)=>{const v=g.rows[r][i],h=hits[r+','+i];
+    return '<td'+(h?' class="hit"':'')+(v===undefined?(h?'':' class="nul"'):' style="background:'+heat(v)+'"')+'>'+(h?h.map(x=>'<span class="badge">'+x+'</span>').join(''):(v===undefined?'':v))+'</td>';}).join('')+'</tr>').join('')+'</table>'+(leg.length?'<div style="margin-top:10px">'+leg.join('')+'</div>':'<p class="small">Renseigne tes sprints pour les voir apparaître dans le tableau.</p>');
 }
 
 /* ---------- Mode Enseignant / Coach ---------- */
 const uid=()=>Math.random().toString(36).slice(2,8);
-const newObs=()=>({id:uid(),nom:'',sexe:'G',opt:[1,1],t:[null,null,null,null],cb:[null,null,null,null]});
+const newObs=()=>({id:uid(),nom:'',sexe:'',opt:[1,1],t:[null,null,null,null],cb:[null,null,null,null]});
 let coach=ld('coach',[]);const coachRun={};let coachTimer=null;
 const coachSave=()=>sv('coach',coach),obs=id=>coach.find(o=>o.id===id);
-function coachTot(o){const s=[0,1,2,3].map(i=>scoreOf(o.sexe,o.t[i],o.cb[i])),done=s.filter(x=>x!==null).length,sum=s.reduce((a,x)=>a+(x||0),0),bonus=done?bonusOf(o.opt):0;return{s,done,sum,bonus,total:sum+bonus};}
+function coachTot(o){const s=[0,1,2,3].map(i=>scoreOf(o.sexe,o.t[i],o.cb[i])),done=s.filter(x=>x!==null).length,sum=s.reduce((a,x)=>a+(x||0),0),bonus=bonusSeries(o.opt,s);return{s,done,sum,bonus,total:sum+bonus};}
 function coachDisp(o,r){const el=(performance.now()-r.t0)/1000;
   if(r.ph==='run')return el.toFixed(2);
   if(r.ph==='rec'){const oo=o.opt[Math.floor(r.k/2)];return oo===3?Math.floor(el)+' s':mmss(OPT[oo].rec-el);}
@@ -916,10 +973,11 @@ function coachChronoHTML(o){
 function coachSeg(id){const r=coachRun[id];return !r?'':(r.ph==='run'?'vite':'recup');}
 function coachChronoUI(id){const o=obs(id),el=$('cc_'+id);if(!o||!el)return;el.innerHTML=coachChronoHTML(o);el.dataset.seg=coachSeg(id);}
 function coachDerived(o){
+  if(!o.sexe)return '<div class="msgbox ko">Choisis garçon ou fille : le barème en dépend.</div>';
   const T=coachTot(o),fq=[0,1,2,3].map(i=>(o.t[i]>0&&o.cb[i]>0)?Math.round(o.cb[i]/o.t[i]*60):'—').join(' · ');
-  const pills=[[0,1],[2,3]].map(([a,b])=>{if(!(o.t[a]>0&&o.t[b]>0))return '';const dt=o.t[b]-o.t[a],dc=(o.cb[a]>0&&o.cb[b]>0)?o.cb[b]-o.cb[a]:null,ok=dt<=1&&(dc===null||dc<3);
+  const pills=[[0,1],[2,3]].map(([a,b])=>{if(!(o.t[a]>0&&o.t[b]>0))return '';const dt=o.t[b]-o.t[a],dc=(o.cb[a]>0&&o.cb[b]>0)?o.cb[b]-o.cb[a]:null,ok=dt<=3&&(dc===null||dc<3);
     return '<span class="cpill '+(ok?'ok':'wa')+'">'+(ok?'✓ ':'⚠ ')+'S'+(b+1)+'−S'+(a+1)+' : '+(dt>0?'+':'')+dt.toFixed(2)+' s'+(dc!==null?' · '+(dc>0?'+':'')+dc+' CB':'')+'</span>';}).join('');
-  return '<div class="fq"><b>CB/min</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>';}
+  return '<div class="fq"><b>Fréquence</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>';}
 function coachRefresh(id){const o=obs(id),a=$('cd_'+id);if(o&&a)a.innerHTML=coachDerived(o);}
 function coachSyncInputs(o){for(let i=0;i<4;i++){const a=$('ci_'+o.id+'_t_'+i),b=$('ci_'+o.id+'_cb_'+i);if(a)a.value=o.t[i]??'';if(b)b.value=o.cb[i]??'';}}
 function coachIn(id,grp,i,v){const o=obs(id);if(!o)return;if(grp==='nom')o.nom=v;else o[grp][i]=num(v);coachSave();coachRefresh(id);if(grp==='t'&&!coachRun[id])coachChronoUI(id);}
@@ -947,7 +1005,7 @@ function coachRender(){
   const sel=(o,j)=>'<select onchange="coachSet(\''+o.id+'\',\'opt'+j+'\',this.value)" aria-label="Option série '+(j+1)+'">'+[1,2,3].map(n=>'<option value="'+n+'"'+(o.opt[j]===n?' selected':'')+'>Option '+n+'</option>').join('')+'</select>';
   const row=(grp,lab,st,o)=>'<tr><th>'+lab+'</th>'+[0,1,2,3].map(i=>'<td><input type="number" inputmode="decimal" step="'+st+'" min="0" id="ci_'+o.id+'_'+grp+'_'+i+'" value="'+esc(o[grp][i]??'')+'" oninput="coachIn(\''+o.id+'\',\''+grp+'\','+i+',this.value)" aria-label="'+lab+' sprint '+(i+1)+'"></td>').join('')+'</tr>';
   el.innerHTML=coach.map((o,i)=>'<div class="coachCard"><div class="top"><input type="text" maxlength="40" placeholder="Nom ou libellé (ex. Léa, Nage '+(i+1)+')" aria-label="Nom ou libellé" value="'+esc(o.nom||'')+'" oninput="coachIn(\''+o.id+'\',\'nom\',null,this.value)"><button class="btn-s warn" onclick="coachDel(\''+o.id+'\')" aria-label="Supprimer">✕</button></div>'+
-    '<div class="pillsOpt two" style="margin-top:8px"><label class="sx"><input type="radio" name="cx_'+o.id+'" '+(o.sexe!=='F'?'checked':'')+' onchange="coachSet(\''+o.id+'\',\'sexe\',\'G\')"><span><b>Garçon</b></span></label><label class="sx"><input type="radio" name="cx_'+o.id+'" '+(o.sexe==='F'?'checked':'')+' onchange="coachSet(\''+o.id+'\',\'sexe\',\'F\')"><span><b>Fille</b></span></label></div>'+
+    '<div class="pillsOpt two" style="margin-top:8px"><label class="sx"><input type="radio" name="cx_'+o.id+'" '+(o.sexe==='G'?'checked':'')+' onchange="coachSet(\''+o.id+'\',\'sexe\',\'G\')"><span><b>Garçon</b></span></label><label class="sx"><input type="radio" name="cx_'+o.id+'" '+(o.sexe==='F'?'checked':'')+' onchange="coachSet(\''+o.id+'\',\'sexe\',\'F\')"><span><b>Fille</b></span></label></div>'+
     '<div class="row2"><span class="small">Série 1</span>'+sel(o,0)+'<span class="small">Série 2</span>'+sel(o,1)+'</div>'+
     '<div class="cchrono" id="cc_'+o.id+'" data-seg="'+coachSeg(o.id)+'">'+coachChronoHTML(o)+'</div>'+
     '<table><thead><tr><th></th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead><tbody>'+row('t','Temps (s)','0.01',o)+row('cb','CB','1',o)+'</tbody></table><div id="cd_'+o.id+'"></div></div>').join('');
@@ -958,7 +1016,7 @@ function coachCsv(){
   if(!rows.length){toast('Aucune observation à exporter');return;}
   const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
   const h=['Nom','Sexe','Option série 1','Option série 2','T1','CB1','Score1','T2','CB2','Score2','T3','CB3','Score3','T4','CB4','Score4','Bonus','Total hors contrats'];
-  const lines=rows.map(o=>{const T=coachTot(o),a=[o.nom,o.sexe==='F'?'Fille':'Garçon',o.opt[0],o.opt[1]];for(let i=0;i<4;i++)a.push(o.t[i],o.cb[i],T.s[i]);a.push(T.bonus,T.total);return a.map(q).join(';');});
+  const lines=rows.map(o=>{const T=coachTot(o),a=[o.nom,o.sexe==='F'?'Fille':(o.sexe==='G'?'Garçon':''),o.opt[0],o.opt[1]];for(let i=0;i<4;i++)a.push(o.t[i],o.cb[i],T.s[i]);a.push(T.bonus,T.total);return a.map(q).join(';');});
   const blob=new Blob(['\ufeff'+h.map(q).join(';')+'\n'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='observations-multisprint.csv';document.body.appendChild(a);a.click();a.remove();toast('Tableau exporté');
 }

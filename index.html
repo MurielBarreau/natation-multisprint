@@ -547,6 +547,22 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .perfSum{margin:6px 0 0;font-size:14px}
 .warnLink{width:100%;border:0;border-radius:14px;padding:12px;margin-bottom:10px;background:linear-gradient(135deg,#FF914D,#FFC46B);color:#3A1500;font-weight:800;text-align:left;font-size:14px}
 .chart .cok{font:900 10.5px Nunito,sans-serif;fill:#1E8A4C}.chart .cko{font:900 10.5px Nunito,sans-serif;fill:#D9480F}.chart .cband{font:700 8px Nunito,sans-serif;fill:#2E7D5B}
+
+.profPanel{position:fixed;inset:0;z-index:300;background:linear-gradient(160deg,#145DA0 0%,#0CC0DF 60%,#7ED957 130%);overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:20px 14px}
+.profPanel[hidden]{display:none}
+.profBox{width:100%;max-width:460px;background:#fff;border-radius:24px;padding:18px;margin:10px 0}
+.profTop{display:flex;align-items:center;gap:12px}.profTop>div{flex:1}.profTop img{border-radius:14px}
+.profBox .brand2{margin:0;font-weight:900;font-size:17px;color:#145DA0}
+.pTitle{margin:14px 0 4px;font-size:24px;color:#145DA0}
+#resTable.half th:nth-child(4),#resTable.half th:nth-child(5),#resTable.half td:nth-child(4),#resTable.half td:nth-child(5){display:none}
+.perfCard>summary{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;list-style:none}
+.perfCard>summary::-webkit-details-marker{display:none}
+.perfCard>summary::after{content:"▾";color:#145DA0;font-weight:900;font-size:18px;transition:transform .15s}
+.perfCard[open]>summary::after{transform:rotate(180deg)}
+.pcInfo{display:flex;flex-direction:column;flex:1;font-size:15px}.pcInfo small{color:#47627A;font-size:12px}
+.pcPts{background:linear-gradient(135deg,#145DA0,#0CC0DF);color:#fff;border-radius:14px;padding:6px 12px;font-size:13px;white-space:nowrap}.pcPts b{font-size:20px;font-weight:900}
+.pcBody{margin-top:10px}
+.printbtn:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -555,10 +571,10 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <header>
   <svg class="waves w1" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path fill="rgba(255,255,255,.4)" d="M0 20 C150 0 150 40 300 20 C450 0 450 40 600 20 C750 0 750 40 900 20 C1050 0 1050 40 1200 20 V40 H0 Z"/></svg>
   <svg class="waves w2" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#EAF4FA" d="M0 20 C150 0 150 40 300 20 C450 0 450 40 600 20 C750 0 750 40 900 20 C1050 0 1050 40 1200 20 V40 H0 Z"/></svg>
-  <div class="brandRow">
+  <div class="brandRow" onclick="openProfil()" role="button" tabindex="0" aria-label="Ouvrir mon profil" style="cursor:pointer">
     <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="rgba(255,255,255,.22)"/><path d="M27 6 14.5 25H23l-2.5 14L34 19h-8.5z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 42c3-2.4 6-2.4 9 0s6 2.4 9 0 6-2.4 9 0 3.5 1.2 5 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
     <div><p class="brand">CA1 - Natation Multisprint</p><p class="sub">Lycée Théas</p>
-      <div class="chipRow"><button id="profChip" class="profChip" onclick="showTab(4)">Choisir un profil</button><button class="profChip" onclick="showTab(5)">Enseignant / Coach</button></div></div>
+      <div class="chipRow"><button id="profChip" class="profChip" onclick="event.stopPropagation();openProfil()">Choisir un profil</button><button class="profChip" onclick="event.stopPropagation();showTab(5)">Enseignant / Coach</button></div></div>
   </div>
 </header>
 <main>
@@ -568,10 +584,13 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <h1 class="t1">Performance</h1>
   <div class="card chronoBox" id="chronoBox">
     <h2>Chrono<small>2 séries de 2 × 25 m crawl sprint · temps à la balise des 5 m</small></h2>
-<h3 style="margin-top:0">Série 1 · option de récupération</h3>
+<div class="pillsOpt two" id="modePills"><label class="sx"><input type="radio" name="mode" value="full" onchange="setMode('full')"><span><b>Épreuve complète</b><i>2 séries · 4 sprints</i></span></label><label class="sx"><input type="radio" name="mode" value="half" onchange="setMode('half')"><span><b>Demi-épreuve</b><i>1 série · 2 sprints</i></span></label></div>
+    <h3 style="margin-top:0">Série 1 · option de récupération</h3>
     <div class="pillsOpt"><label class="o1"><input type="radio" name="opt0" value="1" onchange="setOpt(0,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt0" value="2" onchange="setOpt(0,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt0" value="3" onchange="setOpt(0,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
+    <div id="optS2">
     <h3 style="margin-top:4px">Série 2 · option de récupération</h3>
     <div class="pillsOpt"><label class="o1"><input type="radio" name="opt1" value="1" onchange="setOpt(1,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt1" value="2" onchange="setOpt(1,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt1" value="3" onchange="setOpt(1,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
+    </div>
     <p class="small">Récup avec 25 m nage libre inclus (options 1 et 2). Tu marques le bonus de ton option pour chaque série effectuée.</p>
     <div id="disp">0.00</div>
     <div id="lbl">Prêt — choisis ton option puis lance le sprint 1</div>
@@ -671,14 +690,8 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <!-- TAB 4 : Carnet -->
 <div id="tab4" class="hidden">
   <h1 class="t1">Carnet</h1>
-  <div class="card"><h2>Mon profil<small>Il apparaît dans ton carnet et dans ton PDF</small></h2>
-    <div class="row2"><input type="text" id="pPrenom" placeholder="Prénom" autocomplete="given-name" oninput="setProfil('prenom',this.value)"><input type="text" id="pNom" placeholder="Nom" autocomplete="family-name" oninput="setProfil('nom',this.value)"></div>
-    <div class="row2"><input type="text" id="pClasse" placeholder="Classe (ex. 2de 5)" oninput="setProfil('classe',this.value)"></div>
-    <div class="pillsOpt two" style="margin-top:10px"><label class="sx"><input type="radio" name="psexe" value="G" onchange="setProfil('sexe','G')"><span><b>Garçon</b></span></label><label class="sx"><input type="radio" name="psexe" value="F" onchange="setProfil('sexe','F')"><span><b>Fille</b></span></label></div>
-    <p class="small">Le sexe sert à lire le barème. Tout reste sur cet appareil.</p>
-    <p class="small" id="offNote"></p>
-  </div>
-  <div class="card"><h2>Mes performances</h2>
+  <div id="recordBox"></div>
+  <div class="card"><h2>Historique de mes performances</h2>
     <div id="carList"></div>
     <div class="btnbar"><button class="printbtn" onclick="openCarnet()">Mon carnet en PDF</button><button class="printbtn sec" onclick="exportCSV()">Tableau (CSV)</button></div>
   </div>
@@ -708,6 +721,22 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 </nav>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="profPanel" class="profPanel" role="dialog" aria-modal="true" aria-labelledby="pTitle" hidden>
+  <div class="profBox">
+    <div class="profTop"><img src="icon-192.png" alt="" width="56" height="56"><div><p class="brand2">CA1 - Natation Multisprint</p><p class="small" style="margin:0">Lycée Théas</p></div><button id="pClose" class="btn-s" onclick="closeProfil()" aria-label="Fermer" hidden>✕</button></div>
+    <h2 id="pTitle" class="pTitle">Mon profil</h2>
+    <p class="small">À remplir avant de commencer : il apparaît dans ton carnet et dans ton PDF.</p>
+    <div class="row2"><input type="text" id="pPrenom" placeholder="Prénom" aria-label="Prénom" autocomplete="given-name" oninput="setProfil('prenom',this.value)"><input type="text" id="pNom" placeholder="Nom" aria-label="Nom" autocomplete="family-name" oninput="setProfil('nom',this.value)"></div>
+    <div class="row2"><input type="text" id="pClasse" placeholder="Classe (ex. 2de 5)" aria-label="Classe" oninput="setProfil('classe',this.value)"></div>
+    <div class="pillsOpt two" style="margin-top:10px"><label class="sx"><input type="radio" name="psexe" value="G" onchange="setProfil('sexe','G')"><span><b>Garçon</b></span></label><label class="sx"><input type="radio" name="psexe" value="F" onchange="setProfil('sexe','F')"><span><b>Fille</b></span></label></div>
+    <p class="small">Le genre sert à lire le barème. Tout reste sur cet appareil.</p>
+    <p class="small" id="pHint" style="color:#D9480F;font-weight:800"></p>
+    <button class="printbtn" id="pOk" onclick="closeProfil()" disabled style="width:100%">Valider mon profil</button>
+    <p class="small" id="offNote"></p>
+    <button class="plink" onclick="profCoach()">Accès Enseignant / Coach sans profil</button>
+  </div>
+</div>
+
 
 <script>
 const NS='multisprint:';
@@ -730,6 +759,7 @@ function scoreOf(sx,t,c){
 }
 let S=Object.assign({nom:'',sexe:'G',opt:1,t:[null,null,null,null],cb:[null,null,null,null],manual:false},ld('perf',{}));
 if(!Array.isArray(S.opt))S.opt=[S.opt||1,S.opt||1];
+if(!S.mode)S.mode='full';
 let C=ld('contrats',[]);
 let CAR=ld('carnet',[]);
 const savePerf=()=>sv('perf',S);
@@ -737,9 +767,9 @@ let P=Object.assign({prenom:'',nom:'',classe:'',sexe:''},ld('profil',{}));S.sexe
 const nomProfil=()=>(P.prenom+' '+P.nom).trim();
 function majProfChip(){const n=nomProfil();$('profChip').textContent=n?n+(P.classe?' · '+P.classe:''):'Choisir un profil';}
 const heat=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 78% 82%)';
-function heroHTML(T){const pct=Math.min(100,Math.round(T.total/300*100));
-  return '<div class="hero"><div class="heroTop"><div><span class="hBig">'+T.total+'</span><span class="hU"> pts</span></div><div class="hNote"><span>'+(T.note!==null?T.note:'—')+'</span><small>/20</small></div></div><div class="gauge"><span style="width:'+pct+'%"></span></div><div class="heroSub"><span>4 sprints <b>'+T.sum+'</b></span><span>Bonus options <b>+'+T.bonus+'</b></span><span>Contrats <b>+'+T.ct+'</b></span></div></div>';}
-function tilesHTML(){return '<div class="tiles">'+[0,1,2,3].map(i=>{const p=sc(i),t=S.t[i],c=S.cb[i];return '<div class="stile" style="'+(p===null?'':'background:'+heat(p))+'"><b>S'+(i+1)+'</b><span>'+(t>0?t.toFixed(2)+' s':'— s')+'</span><span>'+(c>0?c+' CB':'— CB')+'</span><strong>'+(p===null?'—':p+' pts')+'</strong></div>';}).join('')+'</div>';}
+function heroHTML(T){const pct=Math.min(100,Math.round(T.total/(S.mode==='half'?150:300)*100));
+  return '<div class="hero"><div class="heroTop"><div><span class="hBig">'+T.total+'</span><span class="hU"> pts</span></div><div class="hNote"><span>'+(T.note!==null?T.note:'—')+'</span><small>/20</small></div></div><div class="gauge"><span style="width:'+pct+'%"></span></div><div class="heroSub"><span>'+nS()+' sprints <b>'+T.sum+'</b></span><span>Bonus options <b>+'+T.bonus+'</b></span><span>Contrats <b>+'+T.ct+'</b></span></div></div>';}
+function tilesHTML(){return tilesFrom(S.t,S.cb,[0,1,2,3].map(sc),nS());}
 
 /* ---------- Navigation ---------- */
 function showTab(n){
@@ -750,7 +780,8 @@ function showTab(n){
 }
 
 /* ---------- Score ---------- */
-const sc=i=>scoreOf(S.sexe,S.t[i],S.cb[i]);
+const nS=()=>S.mode==='half'?2:4;
+const sc=i=>i>=nS()?null:scoreOf(S.sexe,S.t[i],S.cb[i]);
 const bonusSeries=(opt,s)=>[0,1].reduce((a,j)=>a+((s[2*j]!==null&&s[2*j+1]!==null)?OPT[opt[j]].bonus:0),0);
 const optTxt=o=>Array.isArray(o)?(o[0]===o[1]?'option '+o[0]:'options '+o[0]+'/'+o[1]):'option '+o;
 const nbOk=()=>C.filter(c=>c.ok).length;
@@ -759,7 +790,7 @@ function totals(){
   const s=[0,1,2,3].map(sc),done=s.filter(x=>x!==null).length,sum=s.reduce((a,x)=>a+(x||0),0);
   const bonus=bonusSeries(S.opt,s),ct=ptsContrats(),total=sum+bonus+ct;
   let note=null;
-  if(done===4){note=total>=75?Math.min(20,5+Math.floor((total-75)/15)):(S.opt[0]===1&&S.opt[1]===1?5:null);}
+  if(done===4&&S.mode!=='half'){note=total>=75?Math.min(20,5+Math.floor((total-75)/15)):(S.opt[0]===1&&S.opt[1]===1?5:null);}
   return{s,done,sum,bonus,ct,total,note};
 }
 
@@ -786,14 +817,16 @@ function onMain(){
     ph='run';t0=now;tick._v=0;setSeg('vite');$('lbl').textContent='Sprint '+(k+1)+' en cours — Stop à la balise des 5 m';startTick();
   }else if(ph==='run'){
     S.t[k]=+((now-t0)/1000).toFixed(2);
-    if(k===3){ph='done';clearInterval(tid);setSeg('');$('disp').textContent=S.t[k].toFixed(2);$('lbl').textContent='Épreuve terminée — saisis les CB de chaque sprint';}
+    if(k===nS()-1){ph='done';clearInterval(tid);setSeg('');$('disp').textContent=S.t[k].toFixed(2);$('lbl').textContent='Épreuve terminée — saisis les CB de chaque sprint';}
     else{ph=(k%2===0)?'rec':'pause';k++;t0=now;tick._v=0;setSeg('recup');}
     fillInputs();readInputs();
   }
   majBtn();
   if(ph==='rec'||ph==='pause')tick();
 }
+function setMode(m){S.mode=m;savePerf();renderPerf(true);}
 function majBtn(){
+  document.querySelectorAll('input[name=mode]').forEach(r=>{r.checked=(r.value===S.mode);r.disabled=(ph!=='idle'&&ph!=='done');});
   const b=$('btnMain');
   b.disabled=(ph==='done');
   b.textContent=ph==='run'?'Stop sprint '+(k+1):ph==='done'?'Terminé':'Départ sprint '+(k+1);
@@ -807,7 +840,12 @@ function resetChrono(){
   fillInputs();readInputs();majBtn();
 }
 function setOpt(j,n){S.opt[j]=n;savePerf();renderPerf(true);}
-function setProfil(k,v){P[k]=v;if(k==='sexe'){S.sexe=v;savePerf();renderPerf(true);}sv('profil',P);majProfChip();}
+const profilOK=()=>!!(P.prenom.trim()&&P.nom.trim()&&P.sexe);
+function majProfOk(){const ok=profilOK();$('pOk').disabled=!ok;$('pClose').hidden=!ok;$('pHint').textContent=ok?'':'Renseigne ton prénom, ton nom et ton genre (fille ou garçon).';}
+function openProfil(){renderProfil();$('profPanel').hidden=false;majProfOk();offlineStatus();}
+function closeProfil(){if(!profilOK())return;$('profPanel').hidden=true;majProfChip();}
+function profCoach(){$('profPanel').hidden=true;showTab(5);}
+function setProfil(k,v){P[k]=v;if(k==='sexe'){S.sexe=v;savePerf();renderPerf(true);}sv('profil',P);majProfChip();majProfOk();}
 function renderProfil(){$('pPrenom').value=P.prenom;$('pNom').value=P.nom;$('pClasse').value=P.classe;document.querySelectorAll('input[name=psexe]').forEach(r=>r.checked=(r.value===P.sexe));}
 function closeSheet(){$('sheet1').classList.remove('show');document.documentElement.classList.remove('has-sheet');}
 
@@ -819,7 +857,8 @@ function readInputs(timeEdited){
   savePerf();renderPerf(true);
 }
 function renderPerf(keepInputs){
-    majBtn();
+  majBtn();
+  $('resTable').classList.toggle('half',S.mode==='half');$('optS2').style.display=S.mode==='half'?'none':'';
   for(let i=0;i<4;i++){
     $('o'+i).textContent=String(S.opt[Math.floor(i/2)]);
     const t=S.t[i],c=S.cb[i],s=sc(i);
@@ -830,7 +869,7 @@ function renderPerf(keepInputs){
   if(!keepInputs){fillInputs();}
   $('manualWarn').textContent=S.manual?'Valeurs saisies à la main : elles porteront la mention « saisie à la main » dans le carnet.':'';
   const T=totals();
-  $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="showTab(4)">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
+  $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="openProfil()">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
   $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML();
   renderCmp();
   const chips=[];for(let i=0;i<4;i++)if(S.t[i]>0)chips.push('<span class="chip">S'+(i+1)+' · '+S.t[i].toFixed(2)+' s</span>');
@@ -846,7 +885,7 @@ function cmpPair(a,b,title){
   return '<h3 style="margin-top:0">'+title+'</h3><p class="small">Écart de temps : <b>'+(dt>0?'+':'')+dt.toFixed(2)+' s</b>'+(dc!==null?' · Écart de CB : <b>'+(dc>0?'+':'')+dc+'</b>':'')+'</p><div class="msgbox '+cls+'">'+msg+'</div>';
 }
 function renderCmp(){
-  const h=cmpPair(0,1,'Série 1 : sprint 2 / sprint 1')+cmpPair(2,3,'Série 2 : sprint 4 / sprint 3');
+  const h=cmpPair(0,1,'Série 1 : sprint 2 / sprint 1')+(S.mode==='half'?'':cmpPair(2,3,'Série 2 : sprint 4 / sprint 3'));
   $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères : pas plus de 3 s d\'écart de temps, et un écart de CB ≤ 3.)</p>';
 }
 
@@ -867,25 +906,25 @@ function renderContrats(){
 function renderBilan(){
   const T=totals();
   $('heroB').innerHTML=heroHTML(T);$('tilesB').innerHTML=tilesHTML();
-  $('bilanNote').innerHTML=T.note!==null?'':'<div class="msgbox ko">'+(T.done<4?'La note s\'affiche quand les 4 sprints sont renseignés.':'Moins de 75 pts : note à définir avec ton enseignant.')+'</div>';
+  $('bilanNote').innerHTML=T.note!==null?'':'<div class="msgbox ko">'+(S.mode==='half'?'Demi-épreuve : pas de note /20, qui se calcule sur l\'épreuve complète.':T.done<4?'La note s\'affiche quand les 4 sprints sont renseignés.':'Moins de 75 pts : note à définir avec ton enseignant.')+'</div>';
   const L=[],ok=[0,1,2,3].filter(i=>T.s[i]!==null);
   if(ok.length){const best=ok.reduce((a,i)=>T.s[i]>T.s[a]?i:a,ok[0]);L.push('Ton meilleur sprint : le <b>sprint '+(best+1)+'</b> ('+T.s[best]+' pts).');}
-  [[0,1],[2,3]].forEach(([a,b],n)=>{if(S.t[a]>0&&S.t[b]>0){const dt=S.t[b]-S.t[a];L.push('Série '+(n+1)+' : '+(dt>3?'plus de 3 s d\'écart entre tes 2 sprints, pense à ta récupération (CP3).':'tu tiens ta vitesse au 2e sprint.'));}});
-  if(T.done===4&&Math.min(S.opt[0],S.opt[1])<3&&!L.some(x=>/écart entre tes/.test(x)))L.push('Tu tiens bien sur 2 sprints : l\'option suivante te rapporterait plus de points. À tester ?');
+  (S.mode==='half'?[[0,1]]:[[0,1],[2,3]]).forEach(([a,b],n)=>{if(S.t[a]>0&&S.t[b]>0){const dt=S.t[b]-S.t[a];L.push('Série '+(n+1)+' : '+(dt>3?'plus de 3 s d\'écart entre tes 2 sprints, pense à ta récupération (CP3).':'tu tiens ta vitesse au 2e sprint.'));}});
+  if(T.done===nS()&&Math.min(S.opt[0],S.opt[1])<3&&!L.some(x=>/écart entre tes/.test(x)))L.push('Tu tiens bien sur 2 sprints : l\'option suivante te rapporterait plus de points. À tester ?');
   $('bilanTxt').innerHTML=L.length?'<ul>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'<p class="small">Fais ta performance pour obtenir ton bilan.</p>';
   renderBarMine();
 }
 
 /* ---------- Carnet ---------- */
 function saveCarnet(){
-  if(!nomProfil()||!P.sexe){showTab(4);toast('Renseigne ton profil : prénom, nom, fille ou garçon');return;}
+  if(!nomProfil()||!P.sexe){openProfil();return;}
   const T=totals();
   if(T.done===0){toast('Renseigne au moins un sprint');return;}
-  CAR.unshift({d:new Date().toISOString().slice(0,10),nom:nomProfil(),classe:P.classe,sexe:S.sexe,opt:S.opt.slice(),t:S.t.slice(),cb:S.cb.slice(),s:T.s,bonus:T.bonus,ct:T.ct,total:T.total,note:T.note,manual:S.manual});
+  CAR.unshift({d:new Date().toISOString().slice(0,10),nom:nomProfil(),classe:P.classe,sexe:S.sexe,mode:S.mode,opt:S.opt.slice(),t:S.t.slice(),cb:S.cb.slice(),s:T.s,bonus:T.bonus,ct:T.ct,total:T.total,note:T.note,manual:S.manual});
   sv('carnet',CAR);toast('Enregistré dans le carnet');
 }
 function openCarnet(){
-  if(!nomProfil()||!P.sexe){toast('Renseigne ton profil : prénom, nom, fille ou garçon');return;}
+  if(!nomProfil()||!P.sexe){openProfil();return;}
   const fd=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
   const perf=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i,true)).join(''):'<p>Aucune performance enregistrée.</p>');
   const ctr=C.length?'<table><tr><th>Contrat</th><th>Temps visé</th><th>CB visés</th><th>Validé</th></tr>'+C.map(c=>'<tr><td style="text-align:left">'+esc(c.txt||'Contrat')+'</td><td>'+(c.t>0?c.t+' s':'—')+'</td><td>'+(c.cb>0?c.cb:'—')+'</td><td>'+(c.ok?'✓':'—')+'</td></tr>').join('')+'</table><p><b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b></p>':'<p>Aucun contrat pour l\'instant.</p>';
@@ -918,22 +957,26 @@ function stabChart(title,vals,dec,tol,unit,best){
   [0,1,2,3].forEach(i=>{o+='<text x="'+xs[i]+'" y="142" text-anchor="middle" class="cs">S'+(i+1)+'</text>';});
   return o+'<text x="65" y="156" text-anchor="middle" class="cg">Série 1</text><text x="175" y="156" text-anchor="middle" class="cg">Série 2</text></svg>';
 }
-function tilesFrom(t,cb,s){return '<div class="tiles">'+[0,1,2,3].map(i=>'<div class="stile" style="'+(s[i]==null?'':'background:'+heat(s[i]))+'"><b>S'+(i+1)+'</b><span>'+(t[i]>0?(+t[i]).toFixed(2)+' s':'— s')+'</span><span>'+(cb[i]>0?cb[i]+' CB':'— CB')+'</span><strong>'+(s[i]==null?'—':s[i]+' pts')+'</strong></div>').join('')+'</div>';}
-function perfCard(e,i,pdf){
-  const tt=e.t.map(x=>x>0?+x:null),cc=e.cb.map(x=>x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
+function tilesFrom(t,cb,s,n){n=n||4;return '<div class="tiles" style="grid-template-columns:repeat('+n+',1fr)">'+[0,1,2,3].slice(0,n).map(i=>'<div class="stile" style="'+(s[i]==null?'':'background:'+heat(s[i]))+'"><b>S'+(i+1)+'</b><span>'+(t[i]>0?(+t[i]).toFixed(2)+' s':'— s')+'</span><span>'+(cb[i]>0?cb[i]+' CB':'— CB')+'</span><strong>'+(s[i]==null?'—':s[i]+' pts')+'</strong></div>').join('')+'</div>';}
+function perfInner(e){
+  const n=e.mode==='half'?2:4,tt=e.t.map((x,j)=>j<n&&x>0?+x:null),cc=e.cb.map((x,j)=>j<n&&x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
   let best=-1;tt.forEach((x,j)=>{if(x!==null&&(best<0||x<tt[best]))best=j;});
   const bh=best>=0?'<div class="bestBox"><span class="bk">★ Meilleur sprint</span><span class="bv">S'+(best+1)+' · <b>'+tt[best].toFixed(2)+' s</b></span><span>'+(cc[best]!==null?cc[best]+' CB':'— CB')+'</span><span>'+(f[best]!==null?'fréquence <b>'+f[best]+'</b> cycles/min':'')+'</span></div>':'';
-  return '<div class="perfCard"><div class="perfHead"><div><b>'+fdate(e.d)+'</b> · '+esc(optTxt(e.opt))+(e.manual?' · saisie à la main':'')+'</div>'+(pdf?'':'<button class="btn-s warn" onclick="delCar('+i+')" aria-label="Supprimer">✕</button>')+'</div>'+bh+tilesFrom(e.t,e.cb,e.s)+
-   '<div class="charts">'+stabChart('Temps (s)',tt,2,STAB.t,'s',best)+stabChart('Coups de bras (CB)',cc,0,STAB.cb,'CB',-1)+stabChart('Fréquence (cycles/min)',f,1,STAB.f,'cy/min',-1)+'</div><p class="small" style="margin:0">Zone verte = zone de stabilité (écart max : 3 s, 3 CB, 3 cycles/min). Point vert : sprint dans la zone ; point orange : sprint en dehors.</p>'+
-   '<p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p></div>';
+  return bh+tilesFrom(e.t,e.cb,e.s,n)+'<div class="charts">'+stabChart('Temps (s)',tt,2,STAB.t,'s',best)+stabChart('Coups de bras (CB)',cc,0,STAB.cb,'CB',-1)+stabChart('Fréquence (cycles/min)',f,1,STAB.f,'cy/min',-1)+'</div><p class="small" style="margin:0">Zone verte = zone de stabilité (écart max : 3 s, 3 CB, 3 cycles/min). Point vert : sprint dans la zone ; point orange : sprint en dehors.</p><p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p>';
+}
+function perfCard(e,i,pdf){
+  const half=e.mode==='half',lab=esc(optTxt(e.opt))+(half?' · demi-épreuve':'')+(e.manual?' · saisie à la main':'');
+  if(pdf)return '<div class="perfCard"><div class="perfHead"><div><b>'+fdate(e.d)+'</b> · '+lab+'</div></div>'+perfInner(e)+'</div>';
+  return '<details class="perfCard"><summary><span class="pcInfo"><b>'+fdate(e.d)+'</b><small>'+lab+'</small></span><span class="pcPts"><b>'+e.total+'</b> pts</span></summary><div class="pcBody">'+perfInner(e)+'<button class="btn-s warn" onclick="delCar('+i+')" style="margin-top:10px">✕ Supprimer cette performance</button></div></details>';
 }
 function recordCard(){
-  let b=null;CAR.forEach(e=>e.t.forEach((t,j)=>{if(t>0&&(!b||t<b.t))b={t:+t,cb:e.cb[j],d:e.d,j};}));
+  let b=null;CAR.forEach(e=>e.t.forEach((t,j)=>{if(j<(e.mode==='half'?2:4)&&t>0&&(!b||t<b.t))b={t:+t,cb:e.cb[j],d:e.d,j};}));
   if(!b)return '';const f=freqOf(b.t,b.cb);
   return '<div class="recordCard"><div class="rk">★ Mon record sur un sprint</div><div class="rv">'+b.t.toFixed(2)+' s</div><div class="rs">'+(b.cb>0?b.cb+' CB':'')+(f!==null?' · fréquence '+f+' cycles/min':'')+' · sprint '+(b.j+1)+' du '+fdate(b.d)+'</div></div>';
 }
 function renderCarnet(){
-  $('carList').innerHTML=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i)).join(''):'<p class="small">Aucune performance enregistrée.</p>');
+  $('recordBox').innerHTML=recordCard();
+  $('carList').innerHTML=(CAR.length?CAR.map((e,i)=>perfCard(e,i)).join(''):'<p class="small">Aucune performance enregistrée.</p>');
 }
 function delCar(i){if(!confirm('Supprimer cette performance ?'))return;CAR.splice(i,1);sv('carnet',CAR);renderCarnet();}
 function exportCSV(){
@@ -1032,7 +1075,7 @@ function coachCsv(){
 }
 
 /* ---------- Démarrage ---------- */
-renderPerf();majProfChip();
+renderPerf();majProfChip();if(!profilOK())openProfil();
 
 /* ---------- Utilisation hors ligne ---------- */
 function offlineStatus(){

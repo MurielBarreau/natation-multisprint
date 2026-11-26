@@ -563,6 +563,80 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .pcPts{background:linear-gradient(135deg,#145DA0,#0CC0DF);color:#fff;border-radius:14px;padding:6px 12px;font-size:13px;white-space:nowrap}.pcPts b{font-size:20px;font-weight:900}
 .pcBody{margin-top:10px}
 .printbtn:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}
+
+.errBox{margin-top:30px;padding-top:14px;border-top:2px dashed #CFE3F1;text-align:center}
+.errT{font-weight:800;margin:0 0 4px;color:#47627A}
+.errRow{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.errBox .plink{font-size:14px;padding:8px 6px}
+.dng{color:#D9480F !important}
+.plink:disabled{opacity:.35;cursor:not-allowed}
+.pillsOpt.mini{margin:0 0 8px}.pillsOpt.mini span{flex-direction:row;justify-content:center;padding:7px 4px}.pillsOpt.mini span b{font-size:13px}
+
+#modePills .sx:nth-child(1) span{background:linear-gradient(135deg,#5B2A9E,#9B5DE5)}
+#modePills .sx:nth-child(2) span{background:linear-gradient(135deg,#C2255C,#F76B8A)}
+.hl20{display:inline-block;margin-top:8px;padding:5px 12px;border-radius:99px;background:linear-gradient(135deg,#FFD66B,#FF9F43);color:#3A1500;font-weight:900;font-size:13px}
+.pillsOpt span i{font-size:11px;line-height:1.2;font-style:normal;opacity:.95}
+.pathKey{display:flex;gap:10px;align-items:center;margin:8px 0 10px;font-size:13px;padding:8px 10px;border-radius:12px;background:#EEF5FB}
+.pathKey .pk{flex:0 0 26px;height:26px;border-radius:6px;border-left:2px solid #0B2545;border-right:2px solid #0B2545;background:hsl(95 78% 82%)}
+.leg .adv{font-size:13px;color:#47627A}
+.bmat td.pl{border-left:2px solid #0B2545 !important}
+.bmat td.pr{border-right:2px solid #0B2545 !important}
+.bmat td.pt{border-top:2px solid #0B2545 !important}
+.bmat td.pb{border-bottom:2px solid #0B2545 !important}
+
+.barWrap2{position:relative;isolation:isolate}
+#pathSvg{position:absolute;left:0;top:0;pointer-events:none;z-index:2;overflow:visible}
+.barWrap2{padding-top:22px}
+.bmat td.sc1{border-right:3px solid #0B2545 !important}
+.bmat td.sc2{border-bottom:3px solid #0B2545 !important}
+.pathTxt{font:800 11px Nunito,sans-serif;fill:#0B2545}
+.badge{position:relative;z-index:3}
+.verdict{border-radius:14px;padding:12px 14px;margin:8px 0 12px;font-size:15px;color:#0B2545}
+.verdict.L{background:linear-gradient(135deg,#D6EBFF,#BFE3FF)}
+.verdict.R{background:linear-gradient(135deg,#FFE6CC,#FFD2A8)}
+.verdict.P{background:linear-gradient(135deg,#D9F5E3,#BDEBCB)}
+.verdict small{display:block;margin-top:6px;font-size:13px}
+.bingoBox{margin:0 0 12px;padding:10px 14px;border-radius:14px;text-align:center;font-weight:900;font-size:16px;color:#3A1500;background:linear-gradient(135deg,#FFD66B,#FF9F43)}
+
+.bingoBox{font-size:15px}
+.objCard{border-radius:16px;padding:14px;color:#fff;background:linear-gradient(135deg,#145DA0,#0CC0DF 70%,#7ED957 130%);margin-bottom:10px}
+.objCard .objT{font-weight:800;font-size:14px;opacity:.95}.objCard .objV{font-size:24px;margin:2px 0}.objCard .objS{font-size:14px;margin-bottom:10px}
+.objCard .printbtn{background:#fff !important;color:#145DA0 !important;width:100%}
+.defiCard{border-radius:16px;padding:12px 14px;color:#0B2545;font-size:15px}
+.defiCard .objT{font-weight:900;margin-bottom:2px}
+.defiCard.L{background:linear-gradient(135deg,#D6EBFF,#BFE3FF)}.defiCard.R{background:linear-gradient(135deg,#FFE6CC,#FFD2A8)}.defiCard.P{background:linear-gradient(135deg,#D9F5E3,#BDEBCB)}
+.bmat td.past{box-shadow:inset 0 0 0 2px rgba(11,37,69,.4)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.bdg{padding:6px 12px;border-radius:99px;font-weight:800;font-size:13px;color:#fff}
+.bdg.b1{background:linear-gradient(135deg,#E8590C,#F59F00)}.bdg.b2{background:linear-gradient(135deg,#145DA0,#0CC0DF)}.bdg.b3{background:linear-gradient(135deg,#0B8A94,#4CC38A)}.bdg.b4{background:linear-gradient(135deg,#5B2A9E,#C2255C)}
+.bdg.off{background:#DCE6EE !important;color:#7A93A8}
+
+/* ===== v4 : palette sobre et structurée ===== */
+.stepLbl{display:flex;align-items:center;gap:8px;font-weight:900;color:#145DA0;font-size:16px;margin:16px 0 8px}
+.stepN{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#145DA0,#0CC0DF);color:#fff;font-size:14px}
+.serieBox{background:#fff;border:1px solid #CFE3F1;border-radius:18px;padding:10px;margin-bottom:10px}
+.serieT{font-weight:800;color:#47627A;font-size:12.5px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.selGrid{display:grid;gap:8px;grid-auto-rows:1fr}
+.selGrid.two{grid-template-columns:repeat(2,1fr)}.selGrid.three{grid-template-columns:repeat(3,1fr)}
+.sel{position:relative;display:block;margin:0;cursor:pointer}
+.sel input{position:absolute !important;opacity:0;pointer-events:none;width:1px !important;height:1px !important;margin:0 !important}
+.sel span{display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;gap:6px;height:100%;min-height:112px;padding:10px 5px;border-radius:14px;border:2px solid #CFE3F1;background:#fff;color:#145DA0;box-sizing:border-box}
+.selGrid.two .sel span{min-height:66px;justify-content:center}
+.sel span b{font-size:15px}
+.sel span i{font-style:normal;font-size:11.5px;line-height:1.25;color:#47627A;flex:1;display:flex;align-items:center}
+.sel span em{font-style:normal;font-weight:800;font-size:12px;padding:3px 10px;border-radius:99px;background:#EAF4FA;color:#145DA0}
+.sel input:checked+span{background:linear-gradient(135deg,#145DA0,#0CC0DF);border-color:#145DA0;color:#fff}
+.sel input:checked+span i{color:#fff}
+.sel input:checked+span em{background:rgba(255,255,255,.28);color:#fff}
+.sel input:disabled+span{opacity:.5}
+.sel input:focus-visible+span{outline:3px solid #0CC0DF;outline-offset:2px}
+#resTable thead th{background:linear-gradient(135deg,#145DA0,#1C9BD6) !important;color:#fff !important}
+#resTable thead tr:first-child th{background:#0B2545 !important}
+#resTable.half #hS2{display:none}
+.big.chrono{background:linear-gradient(135deg,#145DA0,#0CC0DF) !important;color:#fff !important}
+.printbtn.sec{background:#fff !important;color:#145DA0 !important;border:2px solid #145DA0 !important}
+.hero{background:linear-gradient(135deg,#0B3A6B 0%,#145DA0 50%,#0CC0DF 100%)}
+.objCard .objB{font-size:14px;margin:0 0 12px;opacity:.97}
 </style>
 </head>
 <body>
@@ -583,23 +657,27 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <div id="tab1">
   <h1 class="t1">Performance</h1>
   <div class="card chronoBox" id="chronoBox">
-    <h2>Chrono<small>2 séries de 2 × 25 m crawl sprint · temps à la balise des 5 m</small></h2>
-<div class="pillsOpt two" id="modePills"><label class="sx"><input type="radio" name="mode" value="full" onchange="setMode('full')"><span><b>Épreuve complète</b><i>2 séries · 4 sprints</i></span></label><label class="sx"><input type="radio" name="mode" value="half" onchange="setMode('half')"><span><b>Demi-épreuve</b><i>1 série · 2 sprints</i></span></label></div>
-    <h3 style="margin-top:0">Série 1 · option de récupération</h3>
-    <div class="pillsOpt"><label class="o1"><input type="radio" name="opt0" value="1" onchange="setOpt(0,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt0" value="2" onchange="setOpt(0,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt0" value="3" onchange="setOpt(0,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
-    <div id="optS2">
-    <h3 style="margin-top:4px">Série 2 · option de récupération</h3>
-    <div class="pillsOpt"><label class="o1"><input type="radio" name="opt1" value="1" onchange="setOpt(1,1)"><span><b>Option 1</b><i>récup 3'00</i><em>bonus 0</em></span></label><label class="o2"><input type="radio" name="opt1" value="2" onchange="setOpt(1,2)"><span><b>Option 2</b><i>récup 1'30</i><em>bonus +30</em></span></label><label class="o3"><input type="radio" name="opt1" value="3" onchange="setOpt(1,3)"><span><b>Option 3</b><i>25 m libre</i><em>bonus +50</em></span></label></div>
-    </div>
-    <p class="small">Récup avec 25 m nage libre inclus (options 1 et 2). Tu marques le bonus de ton option pour chaque série effectuée.</p>
+    <h2>Chrono<small>2 séries : 25 m crawl sprint / 25 m nage libre récup / 25 m crawl sprint</small><span class="hl20">⏱ Temps et CB comptés sur 20 mètres</span></h2>
+<div class="stepLbl"><span class="stepN">1</span>Mon épreuve</div>
+    <div class="selGrid two" id="modePills"><label class="sel"><input type="radio" name="mode" value="full" onchange="setMode('full')"><span><b>Épreuve complète</b><i>2 séries · 4 sprints</i></span></label><label class="sel"><input type="radio" name="mode" value="half" onchange="setMode('half')"><span><b>Demi-épreuve</b><i>1 série · 2 sprints</i></span></label></div>
+    <div class="stepLbl"><span class="stepN">2</span>Mes options de récupération</div>
+    <div class="serieBox"><div class="serieT">Série 1</div><div class="selGrid three"><label class="sel"><input type="radio" name="opt0" value="1" onchange="setOpt(0,1)"><span><b>Option 1</b><i>récup 3'00 dont 25 m nage libre</i><em>bonus 0</em></span></label><label class="sel"><input type="radio" name="opt0" value="2" onchange="setOpt(0,2)"><span><b>Option 2</b><i>récup 1'30 dont 25 m nage libre</i><em>bonus +30</em></span></label><label class="sel"><input type="radio" name="opt0" value="3" onchange="setOpt(0,3)"><span><b>Option 3</b><i>récup 25 m nage libre</i><em>bonus +50</em></span></label></div></div>
+    <div class="serieBox" id="optS2"><div class="serieT">Série 2</div><div class="selGrid three"><label class="sel"><input type="radio" name="opt1" value="1" onchange="setOpt(1,1)"><span><b>Option 1</b><i>récup 3'00 dont 25 m nage libre</i><em>bonus 0</em></span></label><label class="sel"><input type="radio" name="opt1" value="2" onchange="setOpt(1,2)"><span><b>Option 2</b><i>récup 1'30 dont 25 m nage libre</i><em>bonus +30</em></span></label><label class="sel"><input type="radio" name="opt1" value="3" onchange="setOpt(1,3)"><span><b>Option 3</b><i>récup 25 m nage libre</i><em>bonus +50</em></span></label></div></div>
+    <p class="small">Tu marques le bonus de ton option pour chaque série effectuée.</p>
+    <div class="stepLbl"><span class="stepN">3</span>Je nage et je chronomètre</div>
     <div id="disp">0.00</div>
     <div id="lbl">Prêt — choisis ton option puis lance le sprint 1</div>
     <div class="btnrow">
       <button class="big chrono" id="btnMain" onclick="onMain()">Départ sprint 1</button>
-      <button class="big recup" id="btnReset" onclick="resetChrono()" disabled>Recommencer</button>
     </div>
     <div class="chips" id="chips"></div>
     <p class="small" style="text-align:center;margin-top:12px">Chronomètre : « Départ » quand le nageur passe la balise des 5 m, « Stop » à la balise des 5 m suivante (20 m). Coach : compte les CB sur ces 20 m.</p>
+    <div class="errBox">
+      <p class="small errT">Une erreur ?</p>
+      <div class="errRow"><button class="plink" id="btnUndo" onclick="undoLast()" disabled>↩ Annuler le dernier chrono</button><button class="plink" id="btnRedo2" onclick="refaireSerie2()" disabled>Refaire la série 2</button></div>
+      <p class="small">Mauvaise option choisie pour la série 2 ? Passe par « Enseignant / Coach » (en haut de l'écran) pour chronométrer à partir de la série 2, puis reporte tes temps et tes CB dans ton tableau.</p>
+      <button class="plink dng" id="btnReset" onclick="resetChrono()" disabled>Tout effacer et recommencer</button>
+    </div>
   </div>
 
   <div class="card">
@@ -609,7 +687,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div id="tiles"></div>
     <h3 style="margin-top:4px">Je saisis ou je corrige<small class="small" style="display:block;font-weight:600">Temps en s, CB sur 20 m</small></h3>
     <table id="resTable">
-      <thead><tr><th></th><th>Sprint 1</th><th>Sprint 2</th><th>Sprint 3</th><th>Sprint 4</th></tr></thead>
+      <thead><tr><th></th><th colspan="2">Série 1</th><th colspan="2" id="hS2">Série 2</th></tr><tr><th></th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead>
       <tbody>
         <tr><th>Option</th><td id="o0"></td><td id="o1"></td><td id="o2"></td><td id="o3"></td></tr>
         <tr><th>Temps (s)</th><td><input type="number" step="0.01" inputmode="decimal" id="t0" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t1" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t2" oninput="readInputs(true)"></td><td><input type="number" step="0.01" inputmode="decimal" id="t3" oninput="readInputs(true)"></td></tr>
@@ -675,7 +753,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <div id="tab3" class="hidden">
   <h1 class="t1">Bilan</h1>
   <div class="card"><h2>Mon score</h2>
-    <div id="heroB"></div><div id="tilesB"></div><div id="bilanNote"></div>
+    <div id="heroB"></div><div id="tilesB"></div><div id="bingoB"></div><div id="bilanNote"></div>
     <p class="small">Note : 75 pts = 5, puis +1 point tous les 15 pts, jusqu'à 20 pour 300 pts. Toute l'épreuve en option 1 : au moins 5.</p>
   </div>
   <div class="card"><h2>Ce que je retiens</h2>
@@ -685,6 +763,9 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <div class="card"><h2>Où je me situe sur le barème<small>Chaque case donne les points pour un temps (ligne) et un nombre de CB (colonne). S1 à S4 : mes sprints.</small></h2>
     <div id="barMine"></div>
   </div>
+  <div class="card"><h2>Mon objectif et mon défi</h2>
+    <div id="objBox"></div>
+  </div>
 </div>
 
 <!-- TAB 4 : Carnet -->
@@ -693,7 +774,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <div id="recordBox"></div>
   <div class="card"><h2>Historique de mes performances</h2>
     <div id="carList"></div>
-    <div class="btnbar"><button class="printbtn" onclick="openCarnet()">Mon carnet en PDF</button><button class="printbtn sec" onclick="exportCSV()">Tableau (CSV)</button></div>
+    <button class="printbtn" onclick="openCarnet()" style="width:100%">Exporter mon carnet d'entraînement</button>
   </div>
 </div>
 
@@ -751,7 +832,10 @@ function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');cle
 const OPT={1:{rec:180,bonus:0,txt:"3'00"},2:{rec:90,bonus:30,txt:"1'30"},3:{rec:0,bonus:50,txt:"25 m libre"}};
 /* Barème du fichier Bingo : points selon le temps (ligne) et les CB (colonne). Même grille de points pour filles et garçons. */
 const BAR={"G":{"cb0":20,"t":[15.0,15.7,16.4,17.1,17.8,18.5,19.2,19.9,20.6,22.0,22.6,23.2,23.8,24.6,25.2,26.8,27.4,28.0,29.0,30.0],"rows":[[50,49,48,47,46,45,44,43,42,41,40,39,38],[48,47,46,45,44,43,42,41,40,39,38,37,36],[46,45,44,43,42,41,40,39,38,37,36,35,34,33],[44,43,42,41,40,39,38,37,36,35,34,33,32,31,30],[42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27],[40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24],[38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21],[36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18],[34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15],[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13],[31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12],[30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11],[29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10],[28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9],[27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8],[26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7],[25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6],[24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5],[23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4],[22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3]]},"F":{"cb0":23,"t":[19.0,19.7,20.4,21.1,21.8,22.5,23.3,23.9,24.6,26.0,26.6,27.2,27.8,28.6,29.2,29.8,30.4,31.0,32.0,33.0],"rows":[[50,49,48,47,46,45,44,43,42,41,40,39,38],[48,47,46,45,44,43,42,41,40,39,38,37,36],[46,45,44,43,42,41,40,39,38,37,36,35,34,33],[44,43,42,41,40,39,38,37,36,35,34,33,32,31,30],[42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27],[40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24],[38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21],[36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18],[34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15],[32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13],[31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12],[30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11],[29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10],[28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9],[27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8],[26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7],[25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6],[24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5],[23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4],[22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3]]}};
-function scoreOf(sx,t,c){
+const BING={F:[19,23],G:[15,20]}; /* bingo : strictement moins de ... s ET moins de ... CB sur un sprint = +50 pts */
+const isBingo=(sx,t,c)=>!!(BING[sx]&&t>0&&c>0&&t<BING[sx][0]&&c<BING[sx][1]);
+function scoreOf(sx,t,c){const b=gridScore(sx,t,c);return b===null?null:b+(isBingo(sx,t,c)?50:0);}
+function gridScore(sx,t,c){
   if(!(t>0)||!(c>0)||!BAR[sx])return null;const g=BAR[sx];
   const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)return 0;
   const j=Math.max(0,Math.round(c)-g.cb0),row=g.rows[r];
@@ -766,7 +850,13 @@ const savePerf=()=>sv('perf',S);
 let P=Object.assign({prenom:'',nom:'',classe:'',sexe:''},ld('profil',{}));S.sexe=P.sexe;
 const nomProfil=()=>(P.prenom+' '+P.nom).trim();
 function majProfChip(){const n=nomProfil();$('profChip').textContent=n?n+(P.classe?' · '+P.classe:''):'Choisir un profil';}
-const heat=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 78% 82%)';
+const heat=p=>p>50?'hsl(42 100% 68%)':'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 78% 82%)';
+function bingoHTML(sx,t,cb,n){
+  let h='';for(let i=0;i<n;i++)if(isBingo(sx,t[i],cb[i]))h+='<div class="bingoBox">★ BINGO ! Sprint '+(i+1)+' : 100 pts</div>';
+  return h;
+}
+const heatA=(p,a,sat,l)=>'hsla('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+','+sat+'%,'+l+'%,'+a+')';
+const heatDim=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 40% 91%)';
 function heroHTML(T){const pct=Math.min(100,Math.round(T.total/(S.mode==='half'?150:300)*100));
   return '<div class="hero"><div class="heroTop"><div><span class="hBig">'+T.total+'</span><span class="hU"> pts</span></div><div class="hNote"><span>'+(T.note!==null?T.note:'—')+'</span><small>/20</small></div></div><div class="gauge"><span style="width:'+pct+'%"></span></div><div class="heroSub"><span>'+nS()+' sprints <b>'+T.sum+'</b></span><span>Bonus options <b>+'+T.bonus+'</b></span><span>Contrats <b>+'+T.ct+'</b></span></div></div>';}
 function tilesHTML(){return tilesFrom(S.t,S.cb,[0,1,2,3].map(sc),nS());}
@@ -776,7 +866,7 @@ function showTab(n){
   closeSheet();$('toast').classList.remove('show');
   $('scroll').scrollTop=0;
   [1,2,3,4,5].forEach(i=>{$('tab'+i).classList.toggle('hidden',n!==i);const b=$('tabBtn'+i);if(b)b.classList.toggle('active',n===i);});
-  if(n===2)renderContrats(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
+  if(n===2)renderContrats(); if(n===3){renderBilan();drawPathArrow();} if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
 }
 
 /* ---------- Score ---------- */
@@ -813,7 +903,7 @@ function startTick(){clearInterval(tid);tid=setInterval(tick,100);}
 function onMain(){
   const now=performance.now();
   if(ph==='idle'||ph==='rec'||ph==='pause'){
-    if(ph==='idle'){S.t=[null,null,null,null];S.cb=[null,null,null,null];S.manual=false;k=0;fillInputs();}
+    if(ph==='idle'){S.t=[null,null,null,null];S.cb=[null,null,null,null];S.manual=false;S.redo=[false,false];k=0;fillInputs();}
     ph='run';t0=now;tick._v=0;setSeg('vite');$('lbl').textContent='Sprint '+(k+1)+' en cours — Stop à la balise des 5 m';startTick();
   }else if(ph==='run'){
     S.t[k]=+((now-t0)/1000).toFixed(2);
@@ -830,13 +920,38 @@ function majBtn(){
   const b=$('btnMain');
   b.disabled=(ph==='done');
   b.textContent=ph==='run'?'Stop sprint '+(k+1):ph==='done'?'Terminé':'Départ sprint '+(k+1);
-  $('btnReset').disabled=(ph==='idle');
+  const anyData=[0,1,2,3].some(i=>S.t[i]>0);
+  $('btnReset').disabled=(ph==='idle'&&!anyData);
+  $('btnUndo').disabled=!(ph==='run'||anyData);
+  $('btnRedo2').disabled=!(S.mode!=='half'&&(S.t[2]>0||S.t[3]>0||(k>=2&&ph!=='idle')));
   [0,1].forEach(j=>document.querySelectorAll('input[name=opt'+j+']').forEach(r=>{r.checked=(+r.value===S.opt[j]);r.disabled=j===0?(ph!=='idle'&&ph!=='done'):((ph==='run'&&k>=2)||(ph==='rec'&&k===3));}));
 }
 function resetChrono(){
-  if(ph!=='idle'&&!confirm('Effacer les temps et les CB de cette épreuve ?'))return;
-  clearInterval(tid);ph='idle';k=0;S.t=[null,null,null,null];S.cb=[null,null,null,null];S.manual=false;setSeg('');
+  if(!confirm('Effacer tous les temps et les CB de cette épreuve ?'))return;
+  clearInterval(tid);ph='idle';k=0;S.t=[null,null,null,null];S.cb=[null,null,null,null];S.manual=false;S.redo=[false,false];setSeg('');
   $('disp').textContent='0.00';$('lbl').textContent='Prêt — choisis ton option puis lance le sprint 1';
+  fillInputs();readInputs();majBtn();
+}
+function undoLast(){
+  const now=performance.now();
+  S.redo=S.redo||[false,false];
+  if(ph==='run'){
+    clearInterval(tid);ph=k===0?'idle':(k%2===1?'rec':'pause');t0=now;tick._v=0;
+    if(ph==='idle'){setSeg('');$('disp').textContent='0.00';$('lbl').textContent='Prêt — lance le sprint 1';}else{setSeg('recup');startTick();tick();}
+  }else{
+    let j=-1;for(let i=nS()-1;i>=0;i--){if(S.t[i]>0){j=i;break;}}
+    if(j<0)return;
+    S.t[j]=null;S.cb[j]=null;k=j;S.redo[j>=2?1:0]=true;clearInterval(tid);
+    if(j===0){ph='idle';setSeg('');$('disp').textContent='0.00';$('lbl').textContent='Prêt — lance le sprint 1';}
+    else{ph=(j%2===1)?'rec':'pause';t0=now;tick._v=0;setSeg('recup');startTick();tick();}
+    fillInputs();readInputs();
+  }
+  majBtn();toast('Dernier chrono annulé');
+}
+function refaireSerie2(){
+  if(!confirm('Effacer les sprints 3 et 4 et refaire la série 2 ?'))return;
+  S.t[2]=null;S.t[3]=null;S.cb[2]=null;S.cb[3]=null;S.redo=S.redo||[false,false];S.redo[1]=true;
+  clearInterval(tid);k=2;ph='pause';t0=performance.now();tick._v=0;setSeg('recup');startTick();tick();
   fillInputs();readInputs();majBtn();
 }
 function setOpt(j,n){S.opt[j]=n;savePerf();renderPerf(true);}
@@ -870,7 +985,7 @@ function renderPerf(keepInputs){
   $('manualWarn').textContent=S.manual?'Valeurs saisies à la main : elles porteront la mention « saisie à la main » dans le carnet.':'';
   const T=totals();
   $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="openProfil()">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
-  $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML();
+  $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML()+bingoHTML(S.sexe,S.t,S.cb,nS());
   renderCmp();
   const chips=[];for(let i=0;i<4;i++)if(S.t[i]>0)chips.push('<span class="chip">S'+(i+1)+' · '+S.t[i].toFixed(2)+' s</span>');
   $('chips').innerHTML=chips.join('');
@@ -905,12 +1020,13 @@ function renderContrats(){
 /* ---------- Bilan ---------- */
 function renderBilan(){
   const T=totals();
-  $('heroB').innerHTML=heroHTML(T);$('tilesB').innerHTML=tilesHTML();
+  $('heroB').innerHTML=heroHTML(T);$('tilesB').innerHTML=tilesHTML();$('bingoB').innerHTML=bingoHTML(S.sexe,S.t,S.cb,nS());
   $('bilanNote').innerHTML=T.note!==null?'':'<div class="msgbox ko">'+(S.mode==='half'?'Demi-épreuve : pas de note /20, qui se calcule sur l\'épreuve complète.':T.done<4?'La note s\'affiche quand les 4 sprints sont renseignés.':'Moins de 75 pts : note à définir avec ton enseignant.')+'</div>';
   const L=[],ok=[0,1,2,3].filter(i=>T.s[i]!==null);
   if(ok.length){const best=ok.reduce((a,i)=>T.s[i]>T.s[a]?i:a,ok[0]);L.push('Ton meilleur sprint : le <b>sprint '+(best+1)+'</b> ('+T.s[best]+' pts).');}
-  (S.mode==='half'?[[0,1]]:[[0,1],[2,3]]).forEach(([a,b],n)=>{if(S.t[a]>0&&S.t[b]>0){const dt=S.t[b]-S.t[a];L.push('Série '+(n+1)+' : '+(dt>3?'plus de 3 s d\'écart entre tes 2 sprints, pense à ta récupération (CP3).':'tu tiens ta vitesse au 2e sprint.'));}});
-  if(T.done===nS()&&Math.min(S.opt[0],S.opt[1])<3&&!L.some(x=>/écart entre tes/.test(x)))L.push('Tu tiens bien sur 2 sprints : l\'option suivante te rapporterait plus de points. À tester ?');
+  (S.mode==='half'?[[0,1]]:[[0,1],[2,3]]).forEach(([a,b],n)=>{if(!(S.t[a]>0&&S.t[b]>0))return;
+    const dt=Math.abs(S.t[b]-S.t[a]),dc=(S.cb[a]>0&&S.cb[b]>0)?Math.abs(S.cb[b]-S.cb[a]):0,o=S.opt[n],stab=dt<=STAB.t&&dc<=STAB.cb;
+    L.push(stab?(o<3?'Série '+(n+1)+' : écart de temps sous 3 s en option '+o+' → tu peux tenter l\'option '+(o+1)+' (bonus +'+(OPT[o+1].bonus-OPT[o].bonus)+' pts).':'Série '+(n+1)+' : option 3 tenue avec moins de 3 s d\'écart, bravo.'):(o>1?'Série '+(n+1)+' : plus de 3 s d\'écart entre tes 2 sprints → l\'option '+(o-1)+' te laisse plus de récupération.':'Série '+(n+1)+' : plus de 3 s d\'écart entre tes 2 sprints : concentre-toi sur la régularité (CP3).'));});
   $('bilanTxt').innerHTML=L.length?'<ul>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'<p class="small">Fais ta performance pour obtenir ton bilan.</p>';
   renderBarMine();
 }
@@ -920,22 +1036,34 @@ function saveCarnet(){
   if(!nomProfil()||!P.sexe){openProfil();return;}
   const T=totals();
   if(T.done===0){toast('Renseigne au moins un sprint');return;}
-  CAR.unshift({d:new Date().toISOString().slice(0,10),nom:nomProfil(),classe:P.classe,sexe:S.sexe,mode:S.mode,opt:S.opt.slice(),t:S.t.slice(),cb:S.cb.slice(),s:T.s,bonus:T.bonus,ct:T.ct,total:T.total,note:T.note,manual:S.manual});
+  CAR.unshift({d:new Date().toISOString().slice(0,10),nom:nomProfil(),classe:P.classe,sexe:S.sexe,mode:S.mode,redo:(S.redo||[false,false]).slice(),opt:S.opt.slice(),t:S.t.slice(),cb:S.cb.slice(),s:T.s,bonus:T.bonus,ct:T.ct,total:T.total,note:T.note,manual:S.manual});
   sv('carnet',CAR);toast('Enregistré dans le carnet');
+}
+let lastCarnet='';
+function carnetFile(){
+  const css=[...document.querySelectorAll('style')].map(x=>x.textContent).join('\n');
+  return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Carnet Multisprint - '+esc(nomProfil())+'</title><style>'+css+'\nhtml,body{height:auto !important;overflow:auto !important}body{background:#EAF4FA;padding:12px}</style></head><body><div class="sheet show">'+lastCarnet+'</div></body></html>';
+}
+async function partagerCarnet(){
+  const nm='carnet-multisprint-'+(nomProfil().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'')||'eleve')+'.html';
+  const file=new File([carnetFile()],nm,{type:'text/html'});
+  try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:"Mon carnet d'entraînement",text:'Carnet Multisprint de '+nomProfil()});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=nm;document.body.appendChild(a);a.click();a.remove();toast('Fichier téléchargé');
 }
 function openCarnet(){
   if(!nomProfil()||!P.sexe){openProfil();return;}
   const fd=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
-  const perf=recordCard()+(CAR.length?CAR.map((e,i)=>perfCard(e,i,true)).join(''):'<p>Aucune performance enregistrée.</p>');
+  const perf=recordCard()+badgesHTML(true)+(CAR.length?CAR.map((e,i)=>perfCard(e,i,true)).join(''):'<p>Aucune performance enregistrée.</p>');
   const ctr=C.length?'<table><tr><th>Contrat</th><th>Temps visé</th><th>CB visés</th><th>Validé</th></tr>'+C.map(c=>'<tr><td style="text-align:left">'+esc(c.txt||'Contrat')+'</td><td>'+(c.t>0?c.t+' s':'—')+'</td><td>'+(c.cb>0?c.cb:'—')+'</td><td>'+(c.ok?'✓':'—')+'</td></tr>').join('')+'</table><p><b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b></p>':'<p>Aucun contrat pour l\'instant.</p>';
   renderBilan();
   let evo='';if(CAR.length>=2){const a=CAR[CAR.length-1],b=CAR[0],d=b.total-a.total;evo='<p>Évolution entre ma première et ma dernière performance : <b>'+(d>0?'+':'')+d+' pts</b> ('+a.total+' → '+b.total+').</p>';}
   const T=totals();
-  $('sheet1').innerHTML='<h2>Mon carnet d\'entraînement · Natation Multisprint</h2><p><strong>'+esc(nomProfil())+'</strong>'+(P.classe?' · '+esc(P.classe):'')+' · '+new Date().toLocaleDateString('fr-FR')+'</p>'+
+  const content='<h2>Mon carnet d\'entraînement · Natation Multisprint</h2><p><strong>'+esc(nomProfil())+'</strong>'+(P.classe?' · '+esc(P.classe):'')+' · '+new Date().toLocaleDateString('fr-FR')+'</p>'+
    '<h3 class="secP">Mes performances</h3>'+perf+'<h3 class="secP">Mon plan d\'entraînement : mes contrats</h3>'+ctr+
    '<h3 class="secP">Mon bilan</h3>'+(T.done?heroHTML(T)+tilesHTML():'')+evo+$('bilanTxt').innerHTML+
-   '<p class="sheetFoot">© Muriel Barreau, CEDREPS, 2026 — Licence CC BY-NC 4.0 : creativecommons.org/licenses/by-nc/4.0/deed.fr</p>'+
-   '<div class="no-print"><div class="btnbar"><button class="printbtn" onclick="window.print()">Enregistrer en PDF</button><button class="printbtn sec" onclick="closeSheet()">Fermer</button></div><p class="small">Dans la fenêtre qui s\'ouvre, choisis « Enregistrer au format PDF » (sur téléphone : « Imprimer » puis « Enregistrer en PDF »).</p></div>';
+   '<p class="sheetFoot">© Muriel Barreau, CEDREPS, 2026 — Licence CC BY-NC 4.0 : creativecommons.org/licenses/by-nc/4.0/deed.fr</p>';
+  lastCarnet=content;
+  $('sheet1').innerHTML=content+'<div class="no-print"><div class="btnbar"><button class="printbtn" onclick="window.print()">Enregistrer en PDF</button><button class="printbtn sec" onclick="partagerCarnet()">Envoyer le fichier</button></div><button class="plink" onclick="closeSheet()" style="margin-top:8px">Fermer</button><p class="small">PDF : dans la fenêtre qui s\'ouvre, choisis « Enregistrer au format PDF » (sur téléphone : « Imprimer » puis « Enregistrer en PDF »). Envoyer le fichier : mail, messagerie, ENT… le destinataire ouvre le carnet dans son navigateur.</p></div>';
   $('sheet1').classList.add('show');document.documentElement.classList.add('has-sheet');$('scroll').scrollTop=0;
 }
 const fdate=d=>{const p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;};
@@ -958,14 +1086,27 @@ function stabChart(title,vals,dec,tol,unit,best){
   return o+'<text x="65" y="156" text-anchor="middle" class="cg">Série 1</text><text x="175" y="156" text-anchor="middle" class="cg">Série 2</text></svg>';
 }
 function tilesFrom(t,cb,s,n){n=n||4;return '<div class="tiles" style="grid-template-columns:repeat('+n+',1fr)">'+[0,1,2,3].slice(0,n).map(i=>'<div class="stile" style="'+(s[i]==null?'':'background:'+heat(s[i]))+'"><b>S'+(i+1)+'</b><span>'+(t[i]>0?(+t[i]).toFixed(2)+' s':'— s')+'</span><span>'+(cb[i]>0?cb[i]+' CB':'— CB')+'</span><strong>'+(s[i]==null?'—':s[i]+' pts')+'</strong></div>').join('')+'</div>';}
+function badgeStatus(){
+  const rg=a=>a.length>1?Math.max(...a)-Math.min(...a):0;let bingo=false,path=false,stab=false,rec=false;
+  CAR.forEach(e=>{const n=e.mode==='half'?2:4,t=[],c=[],f=[];
+    for(let i=0;i<n;i++){if(isBingo(e.sexe,e.t[i],e.cb[i]))bingo=true;if(e.t[i]>0&&e.cb[i]>0){t.push(+e.t[i]);c.push(+e.cb[i]);f.push(freqOf(e.t[i],e.cb[i]));}}
+    const V=pathVerdictFor(e.sexe,e.t,e.cb,n);if(V&&V.pos==='P')path=true;
+    if(t.length>=2&&rg(t)<=STAB.t&&rg(c)<=STAB.cb&&rg(f)<=STAB.f)stab=true;});
+  if(CAR.length>=2){const best=e=>Math.min(...e.t.slice(0,e.mode==='half'?2:4).filter(x=>x>0).map(Number));const b0=best(CAR[0]),pv=Math.min(...CAR.slice(1).map(best));rec=isFinite(b0)&&isFinite(pv)&&b0<pv;}
+  return[{c:'b1',ic:'★',lab:'Bingo',ok:bingo},{c:'b2',ic:'↗',lab:'Sur le chemin',ok:path},{c:'b3',ic:'=',lab:'Stable',ok:stab},{c:'b4',ic:'▲',lab:'Record battu',ok:rec}];
+}
+function badgesHTML(onlyEarned){
+  if(!CAR.length)return '';const B_=badgeStatus().filter(b=>!onlyEarned||b.ok);if(!B_.length)return '';
+  return '<p class="small" style="margin:0 0 4px;font-weight:800">Mes badges</p><div class="badges">'+B_.map(b=>'<span class="bdg '+b.c+(b.ok?'':' off')+'">'+b.ic+' '+b.lab+'</span>').join('')+'</div>';
+}
 function perfInner(e){
   const n=e.mode==='half'?2:4,tt=e.t.map((x,j)=>j<n&&x>0?+x:null),cc=e.cb.map((x,j)=>j<n&&x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
   let best=-1;tt.forEach((x,j)=>{if(x!==null&&(best<0||x<tt[best]))best=j;});
   const bh=best>=0?'<div class="bestBox"><span class="bk">★ Meilleur sprint</span><span class="bv">S'+(best+1)+' · <b>'+tt[best].toFixed(2)+' s</b></span><span>'+(cc[best]!==null?cc[best]+' CB':'— CB')+'</span><span>'+(f[best]!==null?'fréquence <b>'+f[best]+'</b> cycles/min':'')+'</span></div>':'';
-  return bh+tilesFrom(e.t,e.cb,e.s,n)+'<div class="charts">'+stabChart('Temps (s)',tt,2,STAB.t,'s',best)+stabChart('Coups de bras (CB)',cc,0,STAB.cb,'CB',-1)+stabChart('Fréquence (cycles/min)',f,1,STAB.f,'cy/min',-1)+'</div><p class="small" style="margin:0">Zone verte = zone de stabilité (écart max : 3 s, 3 CB, 3 cycles/min). Point vert : sprint dans la zone ; point orange : sprint en dehors.</p><p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p>';
+  return bh+tilesFrom(e.t,e.cb,e.s,n)+bingoHTML(e.sexe,e.t,e.cb,n)+'<div class="charts">'+stabChart('Temps (s)',tt,2,STAB.t,'s',best)+stabChart('Coups de bras (CB)',cc,0,STAB.cb,'CB',-1)+stabChart('Fréquence (cycles/min)',f,1,STAB.f,'cy/min',-1)+'</div><p class="small" style="margin:0">Zone verte = zone de stabilité (écart max : 3 s, 3 CB, 3 cycles/min). Point vert : sprint dans la zone ; point orange : sprint en dehors.</p><p class="perfSum">Bonus +'+e.bonus+' · Contrats +'+e.ct+' · <b>Total '+e.total+' pts</b>'+(e.note!==null?' · <b>note '+e.note+'/20</b>':'')+'</p>';
 }
 function perfCard(e,i,pdf){
-  const half=e.mode==='half',lab=esc(optTxt(e.opt))+(half?' · demi-épreuve':'')+(e.manual?' · saisie à la main':'');
+  const half=e.mode==='half',lab=esc(optTxt(e.opt))+(half?' · demi-épreuve':'')+(e.redo&&e.redo[0]?' · série 1 refaite':'')+(e.redo&&e.redo[1]?' · série 2 refaite':'')+(e.manual?' · saisie à la main':'');
   if(pdf)return '<div class="perfCard"><div class="perfHead"><div><b>'+fdate(e.d)+'</b> · '+lab+'</div></div>'+perfInner(e)+'</div>';
   return '<details class="perfCard"><summary><span class="pcInfo"><b>'+fdate(e.d)+'</b><small>'+lab+'</small></span><span class="pcPts"><b>'+e.total+'</b> pts</span></summary><div class="pcBody">'+perfInner(e)+'<button class="btn-s warn" onclick="delCar('+i+')" style="margin-top:10px">✕ Supprimer cette performance</button></div></details>';
 }
@@ -975,7 +1116,7 @@ function recordCard(){
   return '<div class="recordCard"><div class="rk">★ Mon record sur un sprint</div><div class="rv">'+b.t.toFixed(2)+' s</div><div class="rs">'+(b.cb>0?b.cb+' CB':'')+(f!==null?' · fréquence '+f+' cycles/min':'')+' · sprint '+(b.j+1)+' du '+fdate(b.d)+'</div></div>';
 }
 function renderCarnet(){
-  $('recordBox').innerHTML=recordCard();
+  $('recordBox').innerHTML=recordCard()+badgesHTML(false);
   $('carList').innerHTML=(CAR.length?CAR.map((e,i)=>perfCard(e,i)).join(''):'<p class="small">Aucune performance enregistrée.</p>');
 }
 function delCar(i){if(!confirm('Supprimer cette performance ?'))return;CAR.splice(i,1);sv('carnet',CAR);renderCarnet();}
@@ -993,19 +1134,76 @@ function partager(){
 }
 
 /* ---------- Barème visible (Bilan) ---------- */
+const PATH_L=-2,PATH_R=3; /* chemin : pour la ligne r, colonnes r-2 à r+3 (mêmes indices pour filles et garçons) */
+function pathVerdictFor(sx,T,CB,n){
+  const g=BAR[sx];if(!g)return null;const ds=[],ts=[],cs=[];
+  for(let i=0;i<n;i++){const t=T[i],c=CB[i];if(!(t>0&&c>0))continue;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)continue;ds.push(Math.round(c)-g.cb0-(r+0.5));ts.push(+t);cs.push(+c);}
+  if(!ds.length)return null;
+  const m=a=>a.reduce((x,y)=>x+y,0)/a.length,d=m(ds),tb=m(ts),cb=m(cs);
+  return{pos:d<-2.5?'L':(d>2.5?'R':'P'),tb,cb,fm:Math.round(cb*300/tb)/10};
+}
+const pathVerdict=()=>S.sexe?pathVerdictFor(S.sexe,S.t,S.cb,nS()):null;
+function addObjectif(t,cb,txt){
+  const label=txt||('Objectif : '+t.toFixed(1)+' s en '+cb+' CB');
+  if(C.some(c=>c.txt===label)){toast('Déjà dans tes contrats');return;}
+  C.push({txt:label,t:+t.toFixed(1),cb:cb,ok:false});sv('contrats',C);toast('Ajouté dans tes contrats');
+}
+function renderObjectif(V){
+  const box=$('objBox');if(!box)return;
+  if(!S.sexe||!V){box.innerHTML='<p class="small">Renseigne tes sprints pour obtenir ton objectif et ton défi.</p>';return;}
+  const g=BAR[S.sexe],n=20,r0=g.t.findIndex(x=>V.tb<=x+1e-9);
+  if(r0<0){box.innerHTML='<p class="small">Ton temps moyen est au-delà du tableau : commence par raccourcir ton temps.</p>';return;}
+  const cb0=Math.round(V.cb),jt=cb0-g.cb0,jc=Math.max(0,jt);
+  const cur=(a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0)([0,1,2,3].slice(0,nS()).map(sc).filter(x=>x!==null));
+  let kind=V.pos,t,cb,pref='',ttl,txt,rows=0;
+  if(kind==='L'){const r=Math.max(r0-3,jc+2);if(r>=r0)kind='P';else{t=g.t[r];cb=cb0;pref='≤ ';rows=r0-r;}}
+  else if(kind==='R'){const j=Math.max(jt-3,r0+3);if(j>=jt||j>=n)kind='P';else{t=+V.tb.toFixed(1);cb=g.cb0+j;rows=jt-j;}}
+  if(kind==='P'){
+    if(r0-3<0){const[tm,cm]=BING[S.sexe];
+      window._obj={t:tm,cb:cm,txt:'Bingo : moins de '+tm+' s et moins de '+cm+' CB'};
+      box.innerHTML='<div class="objCard"><div class="objT">Mon contrat : le BINGO</div><div class="objV">moins de <b>'+tm+' s</b> et moins de <b>'+cm+' CB</b></div><div class="objS">+50 pts : 100 pts le sprint</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';return;}
+    t=g.t[r0-3];cb=g.cb0+Math.max(0,jt-3);pref='≤ ';rows=3;}
+  const pts=scoreOf(S.sexe,t,cb),gain=Math.round(pts-cur),f=Math.round(cb*300/t)/10;
+  const cases=rows+' case'+(rows>1?'s':'');
+  let body;
+  if(kind==='L'){ttl='Défi fréquence';body='Garde tes <b>'+cb+' CB</b> et nage chaque sprint en <b>'+t+' s ou moins</b> (au lieu de '+V.tb.toFixed(1)+' s) : en gagnant '+cases+' par le haut, tu te rapproches du chemin en augmentant ta fréquence.';}
+  else if(kind==='R'){ttl='Défi amplitude';body='Garde ton temps ('+V.tb.toFixed(1)+' s) et nage en <b>'+cb+' CB</b> au lieu de '+cb0+' : en allant de '+cases+' vers la gauche, tu te rapproches du chemin en diminuant tes CB.';}
+  else{ttl='Défi : monte le long de la flèche';body='Vise <b>'+t+' s ou moins</b> en <b>'+cb+' CB</b> : '+cases+' le long de la flèche.';}
+  txt=cb+' CB en '+t+' s'+(pref?' ou moins':'');
+  window._obj={t:t,cb:cb,txt:'Contrat : '+txt};
+  box.innerHTML='<div class="objCard"><div class="objT">Mon contrat · '+ttl+'</div><div class="objV"><b>'+cb+' CB</b> en <b>'+pref+t+' s</b></div><div class="objS">fréquence ≈ '+f+' cycles/min'+(gain>0?' · ≈ <b>+'+gain+' pts</b> par sprint':'')+'</div><div class="objB">'+body+'</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';
+}
+function drawPathArrow(){
+  const w=$('barWrap'),svg=$('pathSvg');if(!w||!svg)return;
+  const tb=w.querySelector('table');if(!tb||!tb.offsetWidth)return;
+  const wr=w.getBoundingClientRect(),r0=tb.rows[1],x=r0.cells[1].getBoundingClientRect().right-wr.left,y0=r0.getBoundingClientRect().top-wr.top;
+  svg.setAttribute('width',wr.width);svg.setAttribute('height',wr.height);
+  svg.innerHTML='<line x1="'+x+'" y1="'+y0+'" x2="'+x+'" y2="12" stroke="#0B2545" stroke-width="3"/><polygon points="'+x+',1 '+(x-7)+',13 '+(x+7)+',13" fill="#0B2545"/><text x="'+(x+12)+'" y="11" class="pathTxt">Chemin de progression · 40 cycles/min</text>';
+}
+window.addEventListener('resize',()=>{if(!$('tab3').classList.contains('hidden'))drawPathArrow();});
 function renderBarMine(){
   if(!S.sexe){$('barMine').innerHTML='<p class="small">Choisis ton genre (fille ou garçon) dans ton profil pour voir le barème qui te correspond.</p>';return;}
-  const F=S.sexe==='F',g=BAR[S.sexe],n=20,hits={},leg=[];
-  [0,1,2,3].forEach(i=>{const t=S.t[i],c=S.cb[i];if(!(t>0&&c>0))return;const r=g.t.findIndex(x=>t<=x+1e-9),p=sc(i);
-    leg.push('<div class="leg"><span class="badge">'+(i+1)+'</span><span>Sprint '+(i+1)+' : '+t.toFixed(2)+' s · '+c+' CB → <b>'+p+' pts</b>'+(r<0?' (temps hors tableau)':'')+'</span></div>');
-    if(r<0)return;const j=Math.max(0,Math.round(c)-g.cb0);if(j<n)(hits[r+','+j]=hits[r+','+j]||[]).push(i+1);});
-  $('barMine').innerHTML='<p class="small"><b>Barème '+(F?'filles':'garçons')+'</b> : 50 pts par sprint à '+(F?'19 s et 23 CB':'15 s et 20 CB')+' (ou mieux), soit 100 pts sur une série : le bingo.</p><table class="bmat"><tr><th>T \\ CB</th>'+Array.from({length:n},(_,i)=>'<th>'+(g.cb0+i)+'</th>').join('')+'</tr>'+g.t.map((t,r)=>'<tr><th>'+t+'</th>'+Array.from({length:n},(_,i)=>{const v=g.rows[r][i],h=hits[r+','+i];
-    return '<td'+(h?' class="hit"':'')+(v===undefined?(h?'':' class="nul"'):' style="background:'+heat(v)+'"')+'>'+(h?h.map(x=>'<span class="badge">'+x+'</span>').join(''):(v===undefined?'':v))+'</td>';}).join('')+'</tr>').join('')+'</table>'+(leg.length?'<div style="margin-top:10px">'+leg.join('')+'</div>':'<p class="small">Renseigne tes sprints pour les voir apparaître dans le tableau.</p>');
+  const F=S.sexe==='F',g=BAR[S.sexe],n=20,hits={};
+  [0,1,2,3].slice(0,nS()).forEach(i=>{const t=S.t[i],c=S.cb[i];if(!(t>0&&c>0))return;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)return;const j=Math.max(0,Math.round(c)-g.cb0);if(j<n)(hits[r+','+j]=hits[r+','+j]||[]).push(i+1);});
+  const past={};CAR.slice(0,5).forEach(e=>{if(e.sexe!==S.sexe)return;const ne=e.mode==='half'?2:4;for(let i=0;i<ne;i++){const t=e.t[i],c=e.cb[i];if(!(t>0&&c>0))continue;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)continue;const j=Math.max(0,Math.round(c)-g.cb0);if(j<n)past[r+','+j]=1;}});
+  const V=pathVerdict();
+  let h='<p class="small"><b>Barème '+(F?'filles':'garçons')+'</b> · bingo : +50 pts, soit 100 pts le sprint, quand un sprint est strictement sous '+(F?'19 s et 23 CB':'15 s et 20 CB')+'.</p>';
+  h+='<div class="pathKey"><span class="pk"></span><span><b>Chemin de progression</b> · fréquence de référence : <b>40 cycles/min</b></span></div>';
+  if(V){h+='<div class="verdict '+V.pos+'">'+(V.pos==='L'?'<b>Tu es plutôt à gauche du chemin de progression</b> : tu nageras plus vite en augmentant ta fréquence tout en conservant le même nombre de CB.':V.pos==='R'?'<b>Tu es plutôt à droite du chemin de progression</b> : tu nageras plus vite en diminuant le nombre de CB tout en conservant ta fréquence.':'<b>Tu es dans le chemin de progression</b> : ton temps et ton nombre de CB sont optimaux. Pour nager plus vite, monte le long de la flèche.')+'<small>Fréquence moyenne de tes sprints : <b>'+V.fm+' cycles/min</b> · référence : <b>40 cycles/min</b></small></div>';}
+  else h+='<p class="small">Renseigne tes sprints pour voir où tu te situes par rapport au chemin.</p>';
+  h+='<div class="barWrap2" id="barWrap"><table class="bmat"><tr><th>T \\ CB</th>'+Array.from({length:n},(_,i)=>'<th>'+(g.cb0+i)+'</th>').join('')+'</tr>'+g.t.map((t,r)=>'<tr><th>'+t+'</th>'+Array.from({length:n},(_,i)=>{
+    const v=g.rows[r][i],hh=hits[r+','+i],cl=[],inb=i>=r+PATH_L&&i<=r+PATH_R;
+    if(v===undefined)cl.push('nul');if(hh)cl.push('hit');else if(past[r+','+i])cl.push('past');
+    if(inb){cl.push('in');if(i===r+PATH_L&&r+PATH_L>=0)cl.push('pl');if(i===r+PATH_R&&r+PATH_R<=n-1)cl.push('pr');if(r===0)cl.push('pt');if(r===n-1)cl.push('pb');}
+    if(r<=n-2){if(i===r)cl.push('sc1');if(i===r+1)cl.push('sc2');}
+    return '<td'+(cl.length?' class="'+cl.join(' ')+'"':'')+(v===undefined?'':' style="background:'+(inb?heat(v):heatDim(v))+'"')+'>'+(hh?hh.map(x=>'<span class="badge">'+x+'</span>').join(''):(v===undefined?'':v))+'</td>';}).join('')+'</tr>').join('')+'</table><svg id="pathSvg" aria-hidden="true"></svg></div>';
+  if(Object.keys(hits).length)h+='<p class="small" style="margin-top:8px">Les pastilles 1 à 4 marquent tes sprints'+(Object.keys(past).length?' ; les anneaux, tes sprints des séances précédentes':'')+'.</p>';
+  $('barMine').innerHTML=h;drawPathArrow();renderObjectif(V);
 }
 
 /* ---------- Mode Enseignant / Coach ---------- */
 const uid=()=>Math.random().toString(36).slice(2,8);
-const newObs=()=>({id:uid(),nom:'',sexe:'',opt:[1,1],t:[null,null,null,null],cb:[null,null,null,null]});
+const newObs=()=>({id:uid(),nom:'',go:1,sexe:'',opt:[1,1],t:[null,null,null,null],cb:[null,null,null,null]});
 let coach=ld('coach',[]);const coachRun={};let coachTimer=null;
 const coachSave=()=>sv('coach',coach),obs=id=>coach.find(o=>o.id===id);
 function coachTot(o){const s=[0,1,2,3].map(i=>scoreOf(o.sexe,o.t[i],o.cb[i])),done=s.filter(x=>x!==null).length,sum=s.reduce((a,x)=>a+(x||0),0),bonus=bonusSeries(o.opt,s);return{s,done,sum,bonus,total:sum+bonus};}
@@ -1020,9 +1218,11 @@ function coachLbl(o,r){
   const oo=o.opt[Math.floor(r.k/2)];return oo===3?'25 m nage libre, sans arrêt':((OPT[oo].rec-(performance.now()-r.t0)/1000)>0?'Récupération':'Temps de récup écoulé');}
 function coachChronoHTML(o){
   const r=coachRun[o.id],id=o.id,full=o.t.every(x=>x>0);
-  const btn=r?(r.ph==='run'?'Stop sprint '+(r.k+1):'Départ sprint '+(r.k+1)):(full?'Refaire le chrono':'Départ sprint 1');
-  return '<div class="cdispC" id="ct_'+id+'">'+(r?coachDisp(o,r):'0.00')+'</div><div class="clbl" id="cl_'+id+'">'+(r?coachLbl(o,r):(full?'✓ Temps enregistrés : il reste les CB':'Prêt'))+'</div>'+
+  const g2=o.go===2,btn=r?(r.ph==='run'?'Stop sprint '+(r.k+1):'Départ sprint '+(r.k+1)):(full&&!g2?'Refaire le chrono':'Départ sprint '+(g2?3:1));
+  const pills=r?'':'<div class="pillsOpt two mini"><label class="sx"><input type="radio" name="go_'+id+'" '+(!g2?'checked':'')+' onchange="coachGo(\''+id+'\',1)"><span><b>Départ série 1</b></span></label><label class="sx"><input type="radio" name="go_'+id+'" '+(g2?'checked':'')+' onchange="coachGo(\''+id+'\',2)"><span><b>Départ série 2</b></span></label></div>';
+  return pills+'<div class="cdispC" id="ct_'+id+'">'+(r?coachDisp(o,r):'0.00')+'</div><div class="clbl" id="cl_'+id+'">'+(r?coachLbl(o,r):(full?'✓ Temps enregistrés : il reste les CB':'Prêt'))+'</div>'+
   '<div class="btnrow cbtns"><button class="big chrono" onclick="coachMain(\''+id+'\')">'+btn+'</button>'+(r?'<button class="big recup" onclick="coachStop(\''+id+'\')">Arrêter</button>':'')+'</div>';}
+function coachGo(id,n){const o=obs(id);if(!o)return;o.go=n;coachSave();coachChronoUI(id);}
 function coachSeg(id){const r=coachRun[id];return !r?'':(r.ph==='run'?'vite':'recup');}
 function coachChronoUI(id){const o=obs(id),el=$('cc_'+id);if(!o||!el)return;el.innerHTML=coachChronoHTML(o);el.dataset.seg=coachSeg(id);}
 function coachDerived(o){
@@ -1030,7 +1230,7 @@ function coachDerived(o){
   const T=coachTot(o),fq=[0,1,2,3].map(i=>(o.t[i]>0&&o.cb[i]>0)?(o.cb[i]*30/o.t[i]).toFixed(1):'—').join(' · ');
   const pills=[[0,1],[2,3]].map(([a,b])=>{if(!(o.t[a]>0&&o.t[b]>0))return '';const dt=o.t[b]-o.t[a],dc=(o.cb[a]>0&&o.cb[b]>0)?o.cb[b]-o.cb[a]:null,ok=dt<=3&&(dc===null||dc<=3);
     return '<span class="cpill '+(ok?'ok':'wa')+'">'+(ok?'✓ ':'⚠ ')+'S'+(b+1)+'−S'+(a+1)+' : '+(dt>0?'+':'')+dt.toFixed(2)+' s'+(dc!==null?' · '+(dc>0?'+':'')+dc+' CB':'')+'</span>';}).join('');
-  return '<div class="fq"><b>Fréquence (cy/min)</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>';}
+  return '<div class="fq"><b>Fréquence (cy/min)</b> : '+fq+'</div><div class="fq"><b>Scores</b> : '+T.s.map(x=>x===null?'—':x).join(' · ')+' · bonus '+T.bonus+' = <b>'+T.total+' pts</b> <span class="small">(hors contrats)</span></div><div class="pills">'+pills+'</div>'+bingoHTML(o.sexe,o.t,o.cb,4);}
 function coachRefresh(id){const o=obs(id),a=$('cd_'+id);if(o&&a)a.innerHTML=coachDerived(o);}
 function coachSyncInputs(o){for(let i=0;i<4;i++){const a=$('ci_'+o.id+'_t_'+i),b=$('ci_'+o.id+'_cb_'+i);if(a)a.value=o.t[i]??'';if(b)b.value=o.cb[i]??'';}}
 function coachIn(id,grp,i,v){const o=obs(id);if(!o)return;if(grp==='nom')o.nom=v;else o[grp][i]=num(v);coachSave();coachRefresh(id);if(grp==='t'&&!coachRun[id])coachChronoUI(id);}
@@ -1041,7 +1241,7 @@ function coachClear(){if(!coach.length||!confirm('Effacer toutes les observation
 function coachStop(id){delete coachRun[id];coachChronoUI(id);}
 function coachMain(id){
   const o=obs(id);if(!o)return;let r=coachRun[id];const now=performance.now();
-  if(!r){o.t=[null,null,null,null];o.cb=[null,null,null,null];coachSyncInputs(o);r=coachRun[id]={ph:'run',k:0,t0:now};}
+  if(!r){if(o.go===2){o.t[2]=null;o.t[3]=null;o.cb[2]=null;o.cb[3]=null;r=coachRun[id]={ph:'run',k:2,t0:now};}else{o.t=[null,null,null,null];o.cb=[null,null,null,null];r=coachRun[id]={ph:'run',k:0,t0:now};}coachSyncInputs(o);}
   else if(r.ph==='run'){o.t[r.k]=+((now-r.t0)/1000).toFixed(2);if(r.k===3)delete coachRun[id];else{r.ph=r.k%2===0?'rec':'pause';r.k++;r.t0=now;r.v=0;}}
   else{r.ph='run';r.t0=now;}
   try{navigator.vibrate&&navigator.vibrate(25);}catch(e){}

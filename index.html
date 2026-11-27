@@ -587,8 +587,8 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .barWrap2{position:relative;isolation:isolate}
 #pathSvg{position:absolute;left:0;top:0;pointer-events:none;z-index:2;overflow:visible}
 .barWrap2{padding-top:22px}
-.bmat td.sc1{border-right:3px solid #0B2545 !important}
-.bmat td.sc2{border-bottom:3px solid #0B2545 !important}
+.bmat td.sc1{border-right:3px solid #D6249F !important}
+.bmat td.sc2{border-bottom:3px solid #D6249F !important}
 .pathTxt{font:800 11px Nunito,sans-serif;fill:#D6249F}
 .badge{position:relative;z-index:3}
 .verdict{border-radius:14px;padding:12px 14px;margin:8px 0 12px;font-size:15px;color:#0B2545}
@@ -630,6 +630,15 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .sel input:checked+span em{background:rgba(255,255,255,.28);color:#fff}
 .sel input:disabled+span{opacity:.5}
 .sel input:focus-visible+span{outline:3px solid #0CC0DF;outline-offset:2px}
+
+/* contrat du jour dans le chrono */
+.cjBox{border:2px dashed #0CC0DF;border-radius:16px;padding:12px 14px;margin:6px 0 4px}
+.cjBox select{width:100%;margin-bottom:8px}
+.cjV{font-size:16px;font-weight:800}
+.cjRow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.cjP{border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800;background:#EEF3F7;color:#5B6B7A}
+.cjP.ok{background:#DDF3E4;color:#1F6B3A}.cjP.ko{background:#FBE1E1;color:#9B2C2C}.cjP.wait{background:#FFF1D6;color:#8A5A00}
+.cjBox .printbtn{margin-top:8px}
 /* options de récup : une couleur par option */
 .serieBox .sel:nth-child(1){--oc:#2E9E5B;--ot:#E3F5EA}
 .serieBox .sel:nth-child(2){--oc:#E07B10;--ot:#FDEBD5}
@@ -674,7 +683,9 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div class="serieBox"><div class="serieT">Série 1</div><div class="selGrid three"><label class="sel"><input type="radio" name="opt0" value="1" onchange="setOpt(0,1)"><span><b>Option 1</b><i>récup 3'00 dont 25 m nage libre</i><em>bonus 0</em></span></label><label class="sel"><input type="radio" name="opt0" value="2" onchange="setOpt(0,2)"><span><b>Option 2</b><i>récup 1'30 dont 25 m nage libre</i><em>bonus +30</em></span></label><label class="sel"><input type="radio" name="opt0" value="3" onchange="setOpt(0,3)"><span><b>Option 3</b><i>récup 25 m nage libre</i><em>bonus +50</em></span></label></div></div>
     <div class="serieBox" id="optS2"><div class="serieT">Série 2</div><div class="selGrid three"><label class="sel"><input type="radio" name="opt1" value="1" onchange="setOpt(1,1)"><span><b>Option 1</b><i>récup 3'00 dont 25 m nage libre</i><em>bonus 0</em></span></label><label class="sel"><input type="radio" name="opt1" value="2" onchange="setOpt(1,2)"><span><b>Option 2</b><i>récup 1'30 dont 25 m nage libre</i><em>bonus +30</em></span></label><label class="sel"><input type="radio" name="opt1" value="3" onchange="setOpt(1,3)"><span><b>Option 3</b><i>récup 25 m nage libre</i><em>bonus +50</em></span></label></div></div>
     <p class="small">Tu marques le bonus de ton option pour chaque série effectuée.</p>
-    <div class="stepLbl"><span class="stepN">3</span>Je nage et je chronomètre</div>
+    <div class="stepLbl"><span class="stepN">3</span>Mon contrat du jour</div>
+    <div id="cjBox" class="cjBox"></div>
+    <div class="stepLbl"><span class="stepN">4</span>Je nage et je chronomètre</div>
     <div id="disp">0.00</div>
     <div id="lbl">Prêt — choisis ton option puis lance le sprint 1</div>
     <div class="btnrow">
@@ -866,6 +877,7 @@ function bingoHTML(sx,t,cb,n){
   return h;
 }
 const heatA=(p,a,sat,l)=>'hsla('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+','+sat+'%,'+l+'%,'+a+')';
+const heatDeep=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 78% 68%)'; /* même dégradé, un peu plus foncé : diagonale 50, 47, 44… */
 const heatDim=p=>'hsl('+Math.round(12+Math.min(50,Math.max(0,p))/50*105)+' 40% 91%)';
 function heroHTML(T){const pct=Math.min(100,Math.round(T.total/(S.mode==='half'?150:300)*100));
   return '<div class="hero"><div class="heroTop"><div><span class="hBig">'+T.total+'</span><span class="hU"> pts</span></div><div class="hNote"><span>'+(T.note!==null?T.note:'—')+'</span><small>/20</small></div></div><div class="gauge"><span style="width:'+pct+'%"></span></div><div class="heroSub"><span>'+nS()+' sprints <b>'+T.sum+'</b></span><span>Bonus options <b>+'+T.bonus+'</b></span><span>Contrats <b>+'+T.ct+'</b></span></div></div>';}
@@ -996,7 +1008,7 @@ function renderPerf(keepInputs){
   const T=totals();
   $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="openProfil()">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
   $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML()+bingoHTML(S.sexe,S.t,S.cb,nS());
-  renderCmp();
+  renderCmp();renderCJ();
   const chips=[];for(let i=0;i<4;i++)if(S.t[i]>0)chips.push('<span class="chip">S'+(i+1)+' · '+S.t[i].toFixed(2)+' s</span>');
   $('chips').innerHTML=chips.join('');
 }
@@ -1014,17 +1026,48 @@ function renderCmp(){
   $('cmp').innerHTML=h||'<p class="small">Les écarts apparaissent dès que les temps des 2 sprints d\'une série sont renseignés. (Repères : pas plus de 3 s d\'écart de temps, et un écart de CB ≤ 3.)</p>';
 }
 
+
+/* ---------- Contrat du jour (chrono) ---------- */
+const cjList=()=>C.map((c,i)=>({c:c,i:i})).filter(x=>x.c.t>0&&x.c.cb>0);
+function cjCur(){const L=cjList();if(!L.length)return null;let x=L.find(y=>y.i===S.cj);if(!x){const nv=L.filter(y=>!y.c.ok),A=nv.length?nv:L;x=A[A.length-1];}return x;}
+function cjMeets(c,t,cb){
+  if(!(t>0&&cb>0))return null;
+  if(S.sexe){const a=scoreOf(S.sexe,t,cb),b=scoreOf(S.sexe,c.t,c.cb);if(a!==null&&b!==null)return a>=b;}
+  return t<=c.t&&cb<=c.cb;
+}
+function setCJ(v){S.cj=+v;savePerf();renderCJ();}
+function renderCJ(){
+  const el=$('cjBox');if(!el)return;
+  const cur=cjCur();
+  if(!cur){el.innerHTML='<p class="small" style="margin:0">Pas encore de contrat avec un temps et un nombre de CB. Fixe-le dans l\'onglet Contrats, ou ajoute « Mon contrat » depuis le Bilan : il apparaîtra ici.</p>';return;}
+  const c=cur.c,n=nS(),L=cjList();let ok=0,pills='';
+  const pts=S.sexe?scoreOf(S.sexe,c.t,c.cb):null;
+  for(let i=0;i<n;i++){
+    const t=S.t[i],cb=S.cb[i],m=cjMeets(c,t,cb);
+    if(m===null){pills+='<span class="cjP'+(t>0?' wait':'')+'">S'+(i+1)+(t>0?' · saisis les CB':' · —')+'</span>';}
+    else{if(m)ok++;pills+='<span class="cjP '+(m?'ok':'ko')+'">S'+(i+1)+' · '+(m?'✓ atteint':'✗ pas encore')+'</span>';}
+  }
+  let h='';
+  if(L.length>1)h+='<select id="cjSel" onchange="setCJ(this.value)" aria-label="Choisir mon contrat du jour">'+L.map(x=>'<option value="'+x.i+'"'+(x.i===cur.i?' selected':'')+'>'+esc((x.c.txt||'Contrat').slice(0,60))+(x.c.ok?' ✓':'')+'</option>').join('')+'</select>';
+  h+='<div class="cjV">'+c.cb+' CB en '+(+c.t).toFixed(1)+' s'+(pts!==null?' · '+pts+' pts':'')+'</div>';
+  h+='<div class="small">'+(S.mode==='half'?'Demi-épreuve : reproduis ou améliore cette performance <b>2 fois</b>.':'Épreuve complète : reproduis ou améliore cette performance <b>4 fois</b>.')+' Un sprint compte quand il rapporte autant de points ou plus.</div>';
+  h+='<div class="cjRow">'+pills+'</div><div class="small"><b>'+ok+' / '+n+'</b> sprint'+(n>1?'s':'')+' atteint'+(ok>1?'s':'')+'</div>';
+  if(c.ok)h+='<div class="msgbox ok">Contrat validé ✓</div>';
+  else if(ok===n)h+='<div class="msgbox ok">Bravo : tu as reproduit ton contrat '+n+' fois !</div><button class="printbtn" onclick="toggleContrat('+cur.i+')">Valider ce contrat</button>';
+  el.innerHTML=h;
+}
+
 /* ---------- Contrats ---------- */
 function addContrat(){
   const txt=$('cTxt').value.trim(),t=num($('cT').value),cb=num($('cCB').value);
   if(!txt&&!(t>0&&cb>0)){toast('Décris ton contrat ou renseigne temps et CB');return;}
-  C.push({txt,t,cb,ok:false});sv('contrats',C);$('cTxt').value='';$('cT').value='';$('cCB').value='';renderContrats();
+  C.push({txt,t,cb,ok:false});sv('contrats',C);if(t>0&&cb>0){S.cj=C.length-1;savePerf();}$('cTxt').value='';$('cT').value='';$('cCB').value='';renderContrats();
 }
 function toggleContrat(i){C[i].ok=!C[i].ok;sv('contrats',C);renderContrats();}
-function delContrat(i){if(!confirm('Supprimer ce contrat ?'))return;C.splice(i,1);sv('contrats',C);renderContrats();}
+function delContrat(i){if(!confirm('Supprimer ce contrat ?'))return;C.splice(i,1);sv('contrats',C);if(S.cj===i)S.cj=null;else if(S.cj>i)S.cj--;savePerf();renderContrats();}
 function renderContrats(){
   $('cList').innerHTML=C.length?C.map((c,i)=>'<div class="chk-line" style="justify-content:space-between"><label style="display:flex;align-items:center;gap:6px;flex:1"><input type="checkbox" '+(c.ok?'checked':'')+' onchange="toggleContrat('+i+')"> <span>'+esc(c.txt||'Contrat')+(c.t>0?' <span class="small">('+c.t+' s · '+c.cb+' CB)</span>':'')+'</span></label><button class="btn-s warn" onclick="delContrat('+i+')" aria-label="Supprimer">✕</button></div>').join(''):'<p class="small">Aucun contrat pour l\'instant.</p>';
-  $('cPts').innerHTML='<b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b>';
+  renderCJ();$('cPts').innerHTML='<b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b>';
 }
 
 /* ---------- Bilan ---------- */
@@ -1144,10 +1187,10 @@ function partager(){
 }
 
 /* ---------- Barème visible (Bilan) ---------- */
-const PATH_L=-2,PATH_R=3; /* chemin : pour la ligne r, colonnes r-2 à r+3 (mêmes indices pour filles et garçons) */
+const PATH_L=-3,PATH_R=3; /* chemin : pour la ligne r, colonnes r-3 à r+3 (mêmes indices pour filles et garçons) ; bord gauche : 1re colonne atteinte à la 4e ligne (21,1 s et 23 CB filles, 17,1 s et 20 CB garçons) ; bord droit : part de la 1re ligne, 4e colonne (19 s et 26 CB filles, 15 s et 23 CB garçons) */
 function pathVerdictFor(sx,T,CB,n){
   const g=BAR[sx];if(!g)return null;const ds=[],ts=[],cs=[];
-  for(let i=0;i<n;i++){const t=T[i],c=CB[i];if(!(t>0&&c>0))continue;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)continue;ds.push(Math.round(c)-g.cb0-(r+0.5));ts.push(+t);cs.push(+c);}
+  for(let i=0;i<n;i++){const t=T[i],c=CB[i];if(!(t>0&&c>0))continue;const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)continue;ds.push(Math.round(c)-g.cb0-(r+(PATH_L+PATH_R+1)/2));ts.push(+t);cs.push(+c);}
   if(!ds.length)return null;
   const m=a=>a.reduce((x,y)=>x+y,0)/a.length,d=m(ds),tb=m(ts),cb=m(cs);
   return{pos:d<-2.5?'L':(d>2.5?'R':'P'),tb,cb,fm:Math.round(cb*300/tb)/10};
@@ -1156,7 +1199,7 @@ const pathVerdict=()=>S.sexe?pathVerdictFor(S.sexe,S.t,S.cb,nS()):null;
 function addObjectif(t,cb,txt){
   const label=txt||('Objectif : '+t.toFixed(1)+' s en '+cb+' CB');
   if(C.some(c=>c.txt===label)){toast('Déjà dans tes contrats');return;}
-  C.push({txt:label,t:+t.toFixed(1),cb:cb,ok:false});sv('contrats',C);toast('Ajouté dans tes contrats');
+  C.push({txt:label,t:+t.toFixed(1),cb:cb,ok:false});sv('contrats',C);S.cj=C.length-1;savePerf();renderCJ();toast('Ajouté dans tes contrats');
 }
 function renderObjectif(V){
   const box=$('objBox');if(!box)return;
@@ -1202,7 +1245,7 @@ function renderBarMine(){
     if(v===undefined)cl.push('nul');if(hh)cl.push('hit');else if(past[r+','+i])cl.push('past');
     if(inb){cl.push('in');if(i===r+PATH_L&&r+PATH_L>=0)cl.push('pl');if(i===r+PATH_R&&r+PATH_R<=n-1)cl.push('pr');if(r===0)cl.push('pt');if(r===n-1)cl.push('pb');}
     if(r<=n-2){if(i===r)cl.push('sc1');if(i===r+1)cl.push('sc2');}
-    return '<td'+(cl.length?' class="'+cl.join(' ')+'"':'')+(v===undefined?'':' style="background:'+(inb?heat(v):heatDim(v))+'"')+'>'+(hh?hh.map(x=>'<span class="badge">'+x+'</span>').join(''):(v===undefined?'':v))+'</td>';}).join('')+'</tr>').join('')+'</table><svg id="pathSvg" aria-hidden="true"></svg></div>';
+    return '<td'+(cl.length?' class="'+cl.join(' ')+'"':'')+(v===undefined?'':' style="background:'+(i===r?heatDeep(v):(inb?heat(v):heatDim(v)))+'"')+'>'+(hh?hh.map(x=>'<span class="badge">'+x+'</span>').join(''):(v===undefined?'':v))+'</td>';}).join('')+'</tr>').join('')+'</table><svg id="pathSvg" aria-hidden="true"></svg></div>';
   if(Object.keys(hits).length)h+='<p class="small" style="margin-top:8px">Les pastilles 1 à 4 marquent tes sprints'+(Object.keys(past).length?' ; les anneaux, tes sprints des séances précédentes':'')+'.</p>';
   $('barMine').innerHTML=h;drawPathArrow();renderObjectif(V);
 }

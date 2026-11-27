@@ -589,7 +589,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .barWrap2{padding-top:22px}
 .bmat td.sc1{border-right:3px solid #0B2545 !important}
 .bmat td.sc2{border-bottom:3px solid #0B2545 !important}
-.pathTxt{font:800 11px Nunito,sans-serif;fill:#0B2545}
+.pathTxt{font:800 11px Nunito,sans-serif;fill:#D6249F}
 .badge{position:relative;z-index:3}
 .verdict{border-radius:14px;padding:12px 14px;margin:8px 0 12px;font-size:15px;color:#0B2545}
 .verdict.L{background:linear-gradient(135deg,#D6EBFF,#BFE3FF)}
@@ -630,6 +630,16 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .sel input:checked+span em{background:rgba(255,255,255,.28);color:#fff}
 .sel input:disabled+span{opacity:.5}
 .sel input:focus-visible+span{outline:3px solid #0CC0DF;outline-offset:2px}
+/* options de récup : une couleur par option */
+.serieBox .sel:nth-child(1){--oc:#2E9E5B;--ot:#E3F5EA}
+.serieBox .sel:nth-child(2){--oc:#E07B10;--ot:#FDEBD5}
+.serieBox .sel:nth-child(3){--oc:#D64545;--ot:#FBE1E1}
+.serieBox .sel span{border-color:var(--oc);color:var(--oc)}
+.serieBox .sel span em{background:var(--ot);color:var(--oc)}
+.serieBox .sel input:checked+span{background:var(--oc);border-color:var(--oc);color:#fff}
+.serieBox .sel input:checked+span em{background:rgba(255,255,255,.28);color:#fff}
+.serieBox .sel input:focus-visible+span{outline-color:var(--oc)}
+
 #resTable thead th{background:linear-gradient(135deg,#145DA0,#1C9BD6) !important;color:#fff !important}
 #resTable thead tr:first-child th{background:#0B2545 !important}
 #resTable.half #hS2{display:none}
@@ -1150,35 +1160,31 @@ function addObjectif(t,cb,txt){
 }
 function renderObjectif(V){
   const box=$('objBox');if(!box)return;
-  if(!S.sexe||!V){box.innerHTML='<p class="small">Renseigne tes sprints pour obtenir ton objectif et ton défi.</p>';return;}
-  const g=BAR[S.sexe],n=20,r0=g.t.findIndex(x=>V.tb<=x+1e-9);
-  if(r0<0){box.innerHTML='<p class="small">Ton temps moyen est au-delà du tableau : commence par raccourcir ton temps.</p>';return;}
-  const cb0=Math.round(V.cb),jt=cb0-g.cb0,jc=Math.max(0,jt);
-  const cur=(a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0)([0,1,2,3].slice(0,nS()).map(sc).filter(x=>x!==null));
-  let kind=V.pos,t,cb,pref='',ttl,txt,rows=0;
-  if(kind==='L'){const r=Math.max(r0-3,jc+2);if(r>=r0)kind='P';else{t=g.t[r];cb=cb0;pref='≤ ';rows=r0-r;}}
-  else if(kind==='R'){const j=Math.max(jt-3,r0+3);if(j>=jt||j>=n)kind='P';else{t=+V.tb.toFixed(1);cb=g.cb0+j;rows=jt-j;}}
-  if(kind==='P'){
-    if(r0-3<0){const[tm,cm]=BING[S.sexe];
-      window._obj={t:tm,cb:cm,txt:'Bingo : moins de '+tm+' s et moins de '+cm+' CB'};
-      box.innerHTML='<div class="objCard"><div class="objT">Mon contrat : le BINGO</div><div class="objV">moins de <b>'+tm+' s</b> et moins de <b>'+cm+' CB</b></div><div class="objS">+50 pts : 100 pts le sprint</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';return;}
-    t=g.t[r0-3];cb=g.cb0+Math.max(0,jt-3);pref='≤ ';rows=3;}
-  const pts=scoreOf(S.sexe,t,cb),gain=Math.round(pts-cur),f=Math.round(cb*300/t)/10;
-  const cases=rows+' case'+(rows>1?'s':'');
-  let body;
-  if(kind==='L'){ttl='Défi fréquence';body='Garde tes <b>'+cb+' CB</b> et nage chaque sprint en <b>'+t+' s ou moins</b> (au lieu de '+V.tb.toFixed(1)+' s) : en gagnant '+cases+' par le haut, tu te rapproches du chemin en augmentant ta fréquence.';}
-  else if(kind==='R'){ttl='Défi amplitude';body='Garde ton temps ('+V.tb.toFixed(1)+' s) et nage en <b>'+cb+' CB</b> au lieu de '+cb0+' : en allant de '+cases+' vers la gauche, tu te rapproches du chemin en diminuant tes CB.';}
-  else{ttl='Défi : monte le long de la flèche';body='Vise <b>'+t+' s ou moins</b> en <b>'+cb+' CB</b> : '+cases+' le long de la flèche.';}
-  txt=cb+' CB en '+t+' s'+(pref?' ou moins':'');
-  window._obj={t:t,cb:cb,txt:'Contrat : '+txt};
-  box.innerHTML='<div class="objCard"><div class="objT">Mon contrat · '+ttl+'</div><div class="objV"><b>'+cb+' CB</b> en <b>'+pref+t+' s</b></div><div class="objS">fréquence ≈ '+f+' cycles/min'+(gain>0?' · ≈ <b>+'+gain+' pts</b> par sprint':'')+'</div><div class="objB">'+body+'</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';
+  if(!S.sexe||!V){box.innerHTML='<p class="small">Renseigne tes sprints pour obtenir ton contrat.</p>';return;}
+  const g=BAR[S.sexe];let best=null;
+  for(let i=0;i<nS();i++){
+    const t=+S.t[i],c=+S.cb[i];if(!(t>0&&c>0))continue;
+    const r=g.t.findIndex(x=>t<=x+1e-9);if(r<0)continue;
+    const j=Math.round(c)-g.cb0,lo=r+PATH_L,hi=r+PATH_R;
+    const d=j<lo?lo-j:(j>hi?j-hi:0),pts=scoreOf(S.sexe,t,c)||0,side=j<lo?'L':(j>hi?'R':'P');
+    if(!best||d<best.d||(d===best.d&&pts>best.pts))best={i:i,t:t,cb:Math.round(c),d:d,pts:pts,side:side};
+  }
+  if(!best){box.innerHTML='<p class="small">Ton temps est au-delà du tableau : commence par raccourcir ton temps.</p>';return;}
+  const f=Math.round(best.cb*300/best.t)/10,n=best.i+1;
+  let intro,conseil;
+  if(best.side==='P'){intro='Ton sprint n°'+n+' est dans le chemin de progression : c\'est ta référence.';conseil='Pour progresser, monte le long de la flèche.';}
+  else if(best.side==='L'){intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+(best.d>1?'s':'')+' à gauche).';conseil='Pour t\'en rapprocher, augmente ta fréquence en gardant le même nombre de CB.';}
+  else{intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+(best.d>1?'s':'')+' à droite).';conseil='Pour t\'en rapprocher, diminue ton nombre de CB en gardant ta fréquence.';}
+  const txt=best.cb+' CB en '+best.t.toFixed(1)+' s';
+  window._obj={t:best.t,cb:best.cb,txt:'Contrat : reproduire 4 fois ou améliorer '+txt};
+  box.innerHTML='<div class="objCard"><div class="objT">Mon contrat · Reproduire 4 fois ou améliorer</div><div class="objV"><b>'+best.cb+' CB</b> en <b>'+best.t.toFixed(1)+' s</b></div><div class="objS">fréquence ≈ '+f+' cycles/min · <b>'+best.pts+' pts</b> le sprint</div><div class="objB">'+intro+' Réussis <b>4 sprints à '+best.pts+' pts ou plus</b> : reproduis cette performance 4 fois, ou fais mieux.<br>'+conseil+'</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';
 }
 function drawPathArrow(){
   const w=$('barWrap'),svg=$('pathSvg');if(!w||!svg)return;
   const tb=w.querySelector('table');if(!tb||!tb.offsetWidth)return;
   const wr=w.getBoundingClientRect(),r0=tb.rows[1],x=r0.cells[1].getBoundingClientRect().right-wr.left,y0=r0.getBoundingClientRect().top-wr.top;
   svg.setAttribute('width',wr.width);svg.setAttribute('height',wr.height);
-  svg.innerHTML='<line x1="'+x+'" y1="'+y0+'" x2="'+x+'" y2="12" stroke="#0B2545" stroke-width="3"/><polygon points="'+x+',1 '+(x-7)+',13 '+(x+7)+',13" fill="#0B2545"/><text x="'+(x+12)+'" y="11" class="pathTxt">Chemin de progression · 40 cycles/min</text>';
+  svg.innerHTML='<line x1="'+x+'" y1="'+y0+'" x2="'+x+'" y2="12" stroke="#D6249F" stroke-width="3"/><polygon points="'+x+',1 '+(x-7)+',13 '+(x+7)+',13" fill="#D6249F"/><text x="'+(x+12)+'" y="11" class="pathTxt">Chemin de progression · 40 cycles/min</text>';
 }
 window.addEventListener('resize',()=>{if(!$('tab3').classList.contains('hidden'))drawPathArrow();});
 function renderBarMine(){

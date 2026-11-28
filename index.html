@@ -639,6 +639,27 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .cjP{border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800;background:#EEF3F7;color:#5B6B7A}
 .cjP.ok{background:#DDF3E4;color:#1F6B3A}.cjP.ko{background:#FBE1E1;color:#9B2C2C}.cjP.wait{background:#FFF1D6;color:#8A5A00}
 .cjBox .printbtn{margin-top:8px}
+
+/* badges du carnet : médailles */
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 16px;text-align:center}
+.medal{display:flex;flex-direction:column;align-items:center;position:relative}
+.mdDisc{position:relative;z-index:2;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--g);box-shadow:0 0 0 3px #fff,0 0 0 6px var(--r),0 5px 10px rgba(11,37,69,.28),inset 0 3px 5px rgba(255,255,255,.55),inset 0 -5px 7px rgba(0,0,0,.2)}
+.mdDisc::after{content:"";position:absolute;inset:7px;border-radius:50%;border:2px dashed rgba(255,255,255,.6)}
+.mdIc{font-size:28px;line-height:1;font-weight:900;color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.35)}
+.mdRib{position:absolute;z-index:1;top:50px;left:50%;transform:translateX(-50%);width:38px;height:28px;display:flex;gap:3px}
+.mdRib i{flex:1;background:var(--r);clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%)}
+.mdRib i:first-child{transform:rotate(9deg)}.mdRib i:last-child{transform:rotate(-9deg)}
+.mdLab{margin-top:24px;font-weight:900;font-size:12.5px;line-height:1.15;color:var(--ink)}
+.mdSub{font-size:10.5px;line-height:1.2;color:var(--muted);font-weight:700;margin-top:2px}
+.medal.b1{--g:linear-gradient(145deg,#FFD66B,#F59F00 55%,#E8590C);--r:#C2540A}
+.medal.b2{--g:linear-gradient(145deg,#4FD8F0,#0CC0DF 45%,#145DA0);--r:#145DA0}
+.medal.b3{--g:linear-gradient(145deg,#8FE3B5,#4CC38A 45%,#0B8A94);--r:#0B8A94}
+.medal.b4{--g:linear-gradient(145deg,#E58BB0,#C2255C 50%,#5B2A9E);--r:#5B2A9E}
+.medal.off .mdDisc{background:linear-gradient(145deg,#EEF2F6,#CBD6E0);box-shadow:0 0 0 3px #fff,0 0 0 6px #C3CFDA,inset 0 2px 4px rgba(255,255,255,.7),inset 0 -4px 6px rgba(0,0,0,.08)}
+.medal.off .mdDisc::after{border-color:rgba(122,147,168,.45)}
+.medal.off .mdIc{color:#9DB0C2;text-shadow:0 1px 0 #fff}
+.medal.off .mdRib i{background:#C3CFDA}
+.medal.off .mdLab{color:#7A93A8}
 /* options de récup : une couleur par option */
 .serieBox .sel:nth-child(1){--oc:#2E9E5B;--ot:#E3F5EA}
 .serieBox .sel:nth-child(2){--oc:#E07B10;--ot:#FDEBD5}
@@ -704,8 +725,6 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <div class="card">
     <h2>Mes résultats<small>Ils se calculent au fur et à mesure</small></h2>
     <div id="sexeWarn"></div>
-    <div id="hero"></div>
-    <div id="tiles"></div>
     <h3 style="margin-top:4px">Je saisis ou je corrige<small class="small" style="display:block;font-weight:600">Temps en s, CB sur 20 m</small></h3>
     <table id="resTable">
       <thead><tr><th></th><th colspan="2">Série 1</th><th colspan="2" id="hS2">Série 2</th></tr><tr><th></th><th>S1</th><th>S2</th><th>S3</th><th>S4</th></tr></thead>
@@ -721,6 +740,9 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div id="manualWarn" class="small" style="margin-top:8px"></div>
   </div>
 
+  <div class="card"><h2>Où je me situe sur le barème<small>Chaque case donne les points pour un temps (ligne) et un nombre de CB (colonne). S1 à S4 : mes sprints.</small></h2>
+    <div id="barMine"></div>
+  </div>
   <div class="card"><h2>Écart entre les 2 sprints d'une série</h2>
     <div id="cmp"></div>
   </div>
@@ -780,9 +802,6 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
   <div class="card"><h2>Ce que je retiens</h2>
     <div id="bilanTxt"></div>
     <p class="small">Fil rouge : le nombre de CB n'a de sens qu'avec un temps et une distance de nage.</p>
-  </div>
-  <div class="card"><h2>Où je me situe sur le barème<small>Chaque case donne les points pour un temps (ligne) et un nombre de CB (colonne). S1 à S4 : mes sprints.</small></h2>
-    <div id="barMine"></div>
   </div>
   <div class="card"><h2>Mon objectif et mon défi</h2>
     <div id="objBox"></div>
@@ -888,7 +907,7 @@ function showTab(n){
   closeSheet();$('toast').classList.remove('show');
   $('scroll').scrollTop=0;
   [1,2,3,4,5].forEach(i=>{$('tab'+i).classList.toggle('hidden',n!==i);const b=$('tabBtn'+i);if(b)b.classList.toggle('active',n===i);});
-  if(n===2)renderContrats(); if(n===3){renderBilan();drawPathArrow();} if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
+  if(n===2)renderContrats(); if(n===1)renderBarMine(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
 }
 
 /* ---------- Score ---------- */
@@ -1007,8 +1026,7 @@ function renderPerf(keepInputs){
   $('manualWarn').textContent=S.manual?'Valeurs saisies à la main : elles porteront la mention « saisie à la main » dans le carnet.':'';
   const T=totals();
   $('sexeWarn').innerHTML=P.sexe?'':'<button class="warnLink" onclick="openProfil()">⚠ Choisis ton genre (fille ou garçon) dans ton profil : le barème en dépend →</button>';
-  $('hero').innerHTML=heroHTML(T);$('tiles').innerHTML=tilesHTML()+bingoHTML(S.sexe,S.t,S.cb,nS());
-  renderCmp();renderCJ();
+  renderCmp();renderCJ();renderBarMine();
   const chips=[];for(let i=0;i<4;i++)if(S.t[i]>0)chips.push('<span class="chip">S'+(i+1)+' · '+S.t[i].toFixed(2)+' s</span>');
   $('chips').innerHTML=chips.join('');
 }
@@ -1081,7 +1099,7 @@ function renderBilan(){
     const dt=Math.abs(S.t[b]-S.t[a]),dc=(S.cb[a]>0&&S.cb[b]>0)?Math.abs(S.cb[b]-S.cb[a]):0,o=S.opt[n],stab=dt<=STAB.t&&dc<=STAB.cb;
     L.push(stab?(o<3?'Série '+(n+1)+' : écart de temps sous 3 s en option '+o+' → tu peux tenter l\'option '+(o+1)+' (bonus +'+(OPT[o+1].bonus-OPT[o].bonus)+' pts).':'Série '+(n+1)+' : option 3 tenue avec moins de 3 s d\'écart, bravo.'):(o>1?'Série '+(n+1)+' : plus de 3 s d\'écart entre tes 2 sprints → l\'option '+(o-1)+' te laisse plus de récupération.':'Série '+(n+1)+' : plus de 3 s d\'écart entre tes 2 sprints : concentre-toi sur la régularité (CP3).'));});
   $('bilanTxt').innerHTML=L.length?'<ul>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'<p class="small">Fais ta performance pour obtenir ton bilan.</p>';
-  renderBarMine();
+  renderObjectif(S.sexe?pathVerdict():null);
 }
 
 /* ---------- Carnet ---------- */
@@ -1146,11 +1164,11 @@ function badgeStatus(){
     const V=pathVerdictFor(e.sexe,e.t,e.cb,n);if(V&&V.pos==='P')path=true;
     if(t.length>=2&&rg(t)<=STAB.t&&rg(c)<=STAB.cb&&rg(f)<=STAB.f)stab=true;});
   if(CAR.length>=2){const best=e=>Math.min(...e.t.slice(0,e.mode==='half'?2:4).filter(x=>x>0).map(Number));const b0=best(CAR[0]),pv=Math.min(...CAR.slice(1).map(best));rec=isFinite(b0)&&isFinite(pv)&&b0<pv;}
-  return[{c:'b1',ic:'★',lab:'Bingo',ok:bingo},{c:'b2',ic:'↗',lab:'Sur le chemin',ok:path},{c:'b3',ic:'=',lab:'Stable',ok:stab},{c:'b4',ic:'▲',lab:'Record battu',ok:rec}];
+  return[{c:'b1',ic:'★',lab:'Bingo',sub:'un sprint à 100 pts',ok:bingo},{c:'b2',ic:'↗',lab:'Sur le chemin',sub:'dans le chemin',ok:path},{c:'b3',ic:'≈',lab:'Stable',sub:'sprints réguliers',ok:stab},{c:'b4',ic:'▲',lab:'Record battu',sub:'nouveau meilleur temps',ok:rec}];
 }
 function badgesHTML(onlyEarned){
   if(!CAR.length)return '';const B_=badgeStatus().filter(b=>!onlyEarned||b.ok);if(!B_.length)return '';
-  return '<p class="small" style="margin:0 0 4px;font-weight:800">Mes badges</p><div class="badges">'+B_.map(b=>'<span class="bdg '+b.c+(b.ok?'':' off')+'">'+b.ic+' '+b.lab+'</span>').join('')+'</div>';
+  return '<p class="small" style="margin:0 0 10px;font-weight:800">Mes badges</p><div class="medals"'+(onlyEarned?' style="grid-template-columns:repeat('+B_.length+',minmax(0,90px));justify-content:start"':'')+'>'+B_.map(b=>'<div class="medal '+b.c+(b.ok?'':' off')+'"><div class="mdRib"><i></i><i></i></div><div class="mdDisc"><span class="mdIc">'+b.ic+'</span></div><div class="mdLab">'+b.lab+'</div><div class="mdSub">'+(b.ok?'obtenu':b.sub)+'</div></div>').join('')+'</div>';
 }
 function perfInner(e){
   const n=e.mode==='half'?2:4,tt=e.t.map((x,j)=>j<n&&x>0?+x:null),cc=e.cb.map((x,j)=>j<n&&x>0?+x:null),f=tt.map((t,j)=>freqOf(t,cc[j]));
@@ -1229,7 +1247,7 @@ function drawPathArrow(){
   svg.setAttribute('width',wr.width);svg.setAttribute('height',wr.height);
   svg.innerHTML='<line x1="'+x+'" y1="'+y0+'" x2="'+x+'" y2="12" stroke="#D6249F" stroke-width="3"/><polygon points="'+x+',1 '+(x-7)+',13 '+(x+7)+',13" fill="#D6249F"/><text x="'+(x+12)+'" y="11" class="pathTxt">Chemin de progression · 40 cycles/min</text>';
 }
-window.addEventListener('resize',()=>{if(!$('tab3').classList.contains('hidden'))drawPathArrow();});
+window.addEventListener('resize',()=>{if(!$('tab1').classList.contains('hidden'))drawPathArrow();});
 function renderBarMine(){
   if(!S.sexe){$('barMine').innerHTML='<p class="small">Choisis ton genre (fille ou garçon) dans ton profil pour voir le barème qui te correspond.</p>';return;}
   const F=S.sexe==='F',g=BAR[S.sexe],n=20,hits={};

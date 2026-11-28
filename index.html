@@ -660,6 +660,21 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 .medal.off .mdIc{color:#9DB0C2;text-shadow:0 1px 0 #fff}
 .medal.off .mdRib i{background:#C3CFDA}
 .medal.off .mdLab{color:#7A93A8}
+
+/* onglet Contrats */
+.ctrSteps{list-style:none;counter-reset:cs;display:flex;gap:8px;margin:0;padding:0}
+.ctrSteps li{counter-increment:cs;flex:1;text-align:center;font-size:12.5px;line-height:1.25;color:var(--ink);background:#EEF6FB;border-radius:12px;padding:8px 6px}
+.ctrSteps li::before{content:counter(cs);display:flex;align-items:center;justify-content:center;width:24px;height:24px;margin:0 auto 4px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;font-size:13px}
+.orSep{display:flex;align-items:center;gap:10px;margin:16px 0 12px;color:var(--muted);font-weight:800;font-size:13px}
+.orSep::before,.orSep::after{content:"";flex:1;height:1px;background:var(--border)}
+.tagJ{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:99px;background:#0CC0DF;color:#fff;font-size:11px;font-weight:800;vertical-align:middle}
+.cLine{border:1px solid var(--border);border-radius:14px;padding:10px 12px;margin:8px 0;background:#fff}
+.cLine.ok{background:#F0FAF4;border-color:#BDEBCB}
+.cLine .cTop{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.cLine label{display:flex;align-items:flex-start;gap:8px;flex:1;font-size:14.5px;line-height:1.3;font-weight:700}
+.cLine label input{margin-top:3px;flex-shrink:0}
+.cLine .cMeta{font-size:12.5px;color:var(--muted);font-weight:700;margin:4px 0 0 26px}
+.cLine .cAct{margin:6px 0 0 26px}
 /* options de récup : une couleur par option */
 .serieBox .sel:nth-child(1){--oc:#2E9E5B;--ot:#E3F5EA}
 .serieBox .sel:nth-child(2){--oc:#E07B10;--ot:#FDEBD5}
@@ -757,22 +772,33 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <!-- TAB 2 : Contrats -->
 <div id="tab2" class="hidden">
   <h1 class="t1">Contrats</h1>
-  <div class="card"><h2>Mon contrat<small>Proposé à partir de ma performance dans le chemin, ou la plus proche</small></h2>
-    <div id="ctrBox"></div>
+  <div class="card ctrFlow">
+    <ol class="ctrSteps">
+      <li><b>Je choisis</b> mon contrat</li>
+      <li><b>Je nage</b> : il s'affiche avant le chrono</li>
+      <li><b>Je valide</b> avec mon enseignant</li>
+    </ol>
   </div>
+
   <div class="card">
-    <h2>Mes contrats<small>Chaque contrat associe un temps et un nombre de CB</small></h2>
-    <p class="small">Un contrat se fixe avec ton enseignant. Il se valide en 1 ou 2 séances, avec ton duo. Il tient toujours les deux bouts : le temps de nage <b>et</b> le nombre de CB sur 20 m.</p>
-    <label class="small" for="cTxt">Mon contrat</label>
-    <input type="text" id="cTxt" placeholder="ex. : tenir 15,5 s en 18 CB sur 2 sprints">
-    <div class="row2" style="margin-top:8px">
-      <input type="number" step="0.01" inputmode="decimal" id="cT" placeholder="Temps visé (s)">
-      <input type="number" inputmode="numeric" id="cCB" placeholder="CB visés">
+    <h2><span class="stepN">1</span>Je choisis mon contrat<small>Un contrat tient les deux bouts : le temps de nage <b>et</b> le nombre de CB sur 20 m.</small></h2>
+    <p class="small" style="margin:0 0 6px;font-weight:800">Proposé d'après ma performance</p>
+    <div id="ctrBox"></div>
+    <div class="orSep"><span>ou</span></div>
+    <p class="small" style="margin:0 0 6px;font-weight:800">Je fixe mon contrat avec mon enseignant</p>
+    <div class="row2" style="margin-top:0">
+      <input type="number" step="0.01" inputmode="decimal" id="cT" placeholder="Temps visé (s)" aria-label="Temps visé en secondes">
+      <input type="number" inputmode="numeric" id="cCB" placeholder="CB visés" aria-label="Nombre de CB visés">
     </div>
-    <button class="printbtn sec" onclick="addContrat()">Ajouter ce contrat</button>
-    <div id="cList" style="margin-top:12px"></div>
+    <input type="text" id="cTxt" placeholder="Description (facultatif) : ex. 2 sprints à 15,5 s en 18 CB" aria-label="Description du contrat" style="margin-top:8px">
+    <button class="printbtn sec" onclick="addContrat()" style="width:100%">Ajouter ce contrat</button>
+  </div>
+
+  <div class="card">
+    <h2><span class="stepN">2</span>Mes contrats<small>Le contrat du jour s'affiche dans Performance, avant le chrono. Je coche la case quand mon enseignant l'a validé.</small></h2>
+    <div id="cList"></div>
     <div id="cPts" class="msgbox ok"></div>
-    <p class="small">1 contrat validé = 20 pts · 2 contrats = 40 pts · plus de 2 = 50 pts. Toute triche est une « ligne jaune » : l'enseignant peut redemander de vérifier le temps et les CB.</p>
+    <p class="small">1 contrat validé = 20 pts · 2 contrats = 40 pts · plus de 2 = 50 pts. Il se valide en 1 ou 2 séances, avec ton duo. Toute triche est une « ligne jaune » : l'enseignant peut redemander de vérifier le temps et les CB.</p>
   </div>
 
   <div class="card">
@@ -1081,13 +1107,17 @@ function renderCJ(){
 /* ---------- Contrats ---------- */
 function addContrat(){
   const txt=$('cTxt').value.trim(),t=num($('cT').value),cb=num($('cCB').value);
-  if(!txt&&!(t>0&&cb>0)){toast('Décris ton contrat ou renseigne temps et CB');return;}
-  C.push({txt,t,cb,ok:false});sv('contrats',C);if(t>0&&cb>0){S.cj=C.length-1;savePerf();}$('cTxt').value='';$('cT').value='';$('cCB').value='';renderContrats();
+  if(!txt&&!(t>0&&cb>0)){toast('Renseigne le temps et les CB, ou décris ton contrat');return;}
+  C.push({txt:txt||('Contrat : '+cb+' CB en '+(+t).toFixed(1)+' s'),t,cb,ok:false});sv('contrats',C);if(t>0&&cb>0){S.cj=C.length-1;savePerf();}$('cTxt').value='';$('cT').value='';$('cCB').value='';renderContrats();
 }
 function toggleContrat(i){C[i].ok=!C[i].ok;sv('contrats',C);renderContrats();}
 function delContrat(i){if(!confirm('Supprimer ce contrat ?'))return;C.splice(i,1);sv('contrats',C);if(S.cj===i)S.cj=null;else if(S.cj>i)S.cj--;savePerf();renderContrats();}
 function renderContrats(){
-  $('cList').innerHTML=C.length?C.map((c,i)=>'<div class="chk-line" style="justify-content:space-between"><label style="display:flex;align-items:center;gap:6px;flex:1"><input type="checkbox" '+(c.ok?'checked':'')+' onchange="toggleContrat('+i+')"> <span>'+esc(c.txt||'Contrat')+(c.t>0?' <span class="small">('+c.t+' s · '+c.cb+' CB)</span>':'')+'</span></label><button class="btn-s warn" onclick="delContrat('+i+')" aria-label="Supprimer">✕</button></div>').join(''):'<p class="small">Aucun contrat pour l\'instant.</p>';
+  const cur=cjCur();
+  $('cList').innerHTML=C.length?C.map((c,i)=>{const hasTC=c.t>0&&c.cb>0,isCur=!!cur&&cur.i===i;
+    return '<div class="cLine'+(c.ok?' ok':'')+'"><div class="cTop"><label><input type="checkbox" '+(c.ok?'checked':'')+' onchange="toggleContrat('+i+')"> <span>'+esc(c.txt||'Contrat')+(isCur&&!c.ok?'<span class="tagJ">Contrat du jour</span>':'')+'</span></label><button class="btn-s warn" onclick="delContrat('+i+')" aria-label="Supprimer">✕</button></div>'
+    +(hasTC?'<div class="cMeta">'+c.cb+' CB en '+(+c.t).toFixed(1)+' s'+(c.ok?' · validé ✓':'')+'</div>':(c.ok?'<div class="cMeta">validé ✓</div>':''))
+    +(hasTC&&!c.ok&&!isCur?'<div class="cAct"><button class="btn-s" onclick="setCJ('+i+');renderContrats()">En faire mon contrat du jour</button></div>':'')+'</div>';}).join(''):'<p class="small">Aucun contrat pour l\'instant : choisis-en un ci-dessus.</p>';
   renderCJ();$('cPts').innerHTML='<b>'+nbOk()+'</b> contrat(s) validé(s) = <b>'+ptsContrats()+' pts</b>';
 }
 

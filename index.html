@@ -757,6 +757,9 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
 <!-- TAB 2 : Contrats -->
 <div id="tab2" class="hidden">
   <h1 class="t1">Contrats</h1>
+  <div class="card"><h2>Mon contrat<small>Proposé à partir de ma performance dans le chemin, ou la plus proche</small></h2>
+    <div id="ctrBox"></div>
+  </div>
   <div class="card">
     <h2>Mes contrats<small>Chaque contrat associe un temps et un nombre de CB</small></h2>
     <p class="small">Un contrat se fixe avec ton enseignant. Il se valide en 1 ou 2 séances, avec ton duo. Il tient toujours les deux bouts : le temps de nage <b>et</b> le nombre de CB sur 20 m.</p>
@@ -803,7 +806,7 @@ html.has-sheet #scroll>header,html.has-sheet #scroll>main,html.has-sheet #scroll
     <div id="bilanTxt"></div>
     <p class="small">Fil rouge : le nombre de CB n'a de sens qu'avec un temps et une distance de nage.</p>
   </div>
-  <div class="card"><h2>Mon objectif et mon défi</h2>
+  <div class="card"><h2>Mon défi<small>Ce que je change pour me rapprocher du chemin</small></h2>
     <div id="objBox"></div>
   </div>
 </div>
@@ -907,7 +910,7 @@ function showTab(n){
   closeSheet();$('toast').classList.remove('show');
   $('scroll').scrollTop=0;
   [1,2,3,4,5].forEach(i=>{$('tab'+i).classList.toggle('hidden',n!==i);const b=$('tabBtn'+i);if(b)b.classList.toggle('active',n===i);});
-  if(n===2)renderContrats(); if(n===1)renderBarMine(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
+  if(n===2){renderContrats();renderObjectif(S.sexe?pathVerdict():null);} if(n===1)renderBarMine(); if(n===3)renderBilan(); if(n===4){renderProfil();renderCarnet();offlineStatus();} if(n===5)coachRender();
 }
 
 /* ---------- Score ---------- */
@@ -1220,8 +1223,9 @@ function addObjectif(t,cb,txt){
   C.push({txt:label,t:+t.toFixed(1),cb:cb,ok:false});sv('contrats',C);S.cj=C.length-1;savePerf();renderCJ();toast('Ajouté dans tes contrats');
 }
 function renderObjectif(V){
-  const box=$('objBox');if(!box)return;
-  if(!S.sexe||!V){box.innerHTML='<p class="small">Renseigne tes sprints pour obtenir ton contrat.</p>';return;}
+  const bx=$('objBox'),cx=$('ctrBox');if(!bx&&!cx)return;
+  const put=h=>{if(bx)bx.innerHTML=h;if(cx)cx.innerHTML=h;};
+  if(!S.sexe||!V){put('<p class="small">Renseigne tes sprints pour obtenir ton défi et ton contrat.</p>');return;}
   const g=BAR[S.sexe];let best=null;
   for(let i=0;i<nS();i++){
     const t=+S.t[i],c=+S.cb[i];if(!(t>0&&c>0))continue;
@@ -1230,15 +1234,16 @@ function renderObjectif(V){
     const d=j<lo?lo-j:(j>hi?j-hi:0),pts=scoreOf(S.sexe,t,c)||0,side=j<lo?'L':(j>hi?'R':'P');
     if(!best||d<best.d||(d===best.d&&pts>best.pts))best={i:i,t:t,cb:Math.round(c),d:d,pts:pts,side:side};
   }
-  if(!best){box.innerHTML='<p class="small">Ton temps est au-delà du tableau : commence par raccourcir ton temps.</p>';return;}
-  const f=Math.round(best.cb*300/best.t)/10,n=best.i+1;
-  let intro,conseil;
-  if(best.side==='P'){intro='Ton sprint n°'+n+' est dans le chemin de progression : c\'est ta référence.';conseil='Pour progresser, monte le long de la flèche.';}
-  else if(best.side==='L'){intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+(best.d>1?'s':'')+' à gauche).';conseil='Pour t\'en rapprocher, augmente ta fréquence en gardant le même nombre de CB.';}
-  else{intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+(best.d>1?'s':'')+' à droite).';conseil='Pour t\'en rapprocher, diminue ton nombre de CB en gardant ta fréquence.';}
+  if(!best){put('<p class="small">Ton temps est au-delà du tableau : commence par raccourcir ton temps.</p>');return;}
+  const f=Math.round(best.cb*300/best.t)/10,n=best.i+1,pl=best.d>1?'s':'';
+  let titre,intro,conseil;
+  if(best.side==='P'){titre='Monte le long de la flèche';intro='Ton sprint n°'+n+' est dans le chemin de progression : c\'est ta référence.';conseil='Pour progresser, monte le long de la flèche.';}
+  else if(best.side==='L'){titre='Augmente ta fréquence';intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+pl+' à gauche).';conseil='Pour t\'en rapprocher, augmente ta fréquence en gardant le même nombre de CB.';}
+  else{titre='Diminue tes CB';intro='Ton sprint n°'+n+' est le plus proche du chemin ('+best.d+' colonne'+pl+' à droite).';conseil='Pour t\'en rapprocher, diminue ton nombre de CB en gardant ta fréquence.';}
   const txt=best.cb+' CB en '+best.t.toFixed(1)+' s';
   window._obj={t:best.t,cb:best.cb,txt:'Contrat : reproduire 4 fois ou améliorer '+txt};
-  box.innerHTML='<div class="objCard"><div class="objT">Mon contrat · Reproduire 4 fois ou améliorer</div><div class="objV"><b>'+best.cb+' CB</b> en <b>'+best.t.toFixed(1)+' s</b></div><div class="objS">fréquence ≈ '+f+' cycles/min · <b>'+best.pts+' pts</b> le sprint</div><div class="objB">'+intro+' Réussis <b>4 sprints à '+best.pts+' pts ou plus</b> : reproduis cette performance 4 fois, ou fais mieux.<br>'+conseil+'</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';
+  if(bx)bx.innerHTML='<div class="defiCard '+best.side+'"><div class="objT">'+titre+'</div>'+intro+'<br>'+conseil+'</div><button class="printbtn" style="width:100%;margin-top:10px" onclick="showTab(2)">Fixer mon contrat →</button>';
+  if(cx)cx.innerHTML='<div class="objCard"><div class="objT">Reproduire 4 fois ou améliorer</div><div class="objV"><b>'+best.cb+' CB</b> en <b>'+best.t.toFixed(1)+' s</b></div><div class="objS">fréquence ≈ '+f+' cycles/min · <b>'+best.pts+' pts</b> le sprint</div><div class="objB">Ta référence : le sprint n°'+n+'. Réussis <b>4 sprints à '+best.pts+' pts ou plus</b> : reproduis cette performance 4 fois, ou fais mieux.</div><button class="printbtn" onclick="addObjectif(_obj.t,_obj.cb,_obj.txt)">Ajouter à mes contrats</button></div>';
 }
 function drawPathArrow(){
   const w=$('barWrap'),svg=$('pathSvg');if(!w||!svg)return;
